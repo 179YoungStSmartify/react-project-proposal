@@ -1,0 +1,37 @@
+[
+  {
+    "name": "vivid-white",
+    "label": "Vivid White",
+    "file": "clipsal-iconic-vivid-white.jpg",
+    "chip": "#f7f7f4",
+    "bytes": 16412
+  },
+  {
+    "name": "extra-white",
+    "label": "Extra White",
+    "file": "clipsal-iconic-extra-white.jpg",
+    "chip": "#fcfbf8",
+    "bytes": 19339
+  },
+  {
+    "name": "cool-grey",
+    "label": "Cool Grey",
+    "file": "clipsal-iconic-cool-grey.jpg",
+    "chip": "#b0afab",
+    "bytes": 34175
+  },
+  {
+    "name": "anthracite",
+    "label": "Anthracite",
+    "file": "clipsal-iconic-anthracite.jpg",
+    "chip": "#545350",
+    "bytes": 36685
+  },
+  {
+    "name": "black",
+    "label": "Black",
+    "file": "clipsal-iconic-black.jpg",
+    "chip": "#222222",
+    "bytes": 33257
+  }
+]

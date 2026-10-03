@@ -1,23 +1,15 @@
-name: Deploy proposal to GitHub Pages
-
+name: Deploy GitHub Pages
 on:
   push:
     branches: [main]
-    paths:
-      - client/proposal-tiers.html
-      - client/images/**
-      - .github/workflows/pages.yml
   workflow_dispatch:
-
 permissions:
   contents: read
   pages: write
   id-token: write
-
 concurrency:
   group: pages
   cancel-in-progress: true
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,25 +17,19 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-      # Publish ONLY the client proposal; internal docs must never reach Pages.
-      - name: Assemble site
-        run: |
-          mkdir -p _site/images
-          cp client/proposal-tiers.html _site/index.html
-          cp client/images/zemismart-push-switch.jpg client/images/clipsal-iconic-switch.png client/images/clipsal-rotary-plate-candidate.webp client/images/samsung-galaxy-tab-a9-plus.png _site/images/
-          cp client/images/clipsal-iconic-vivid-white.jpg client/images/clipsal-iconic-extra-white.jpg client/images/clipsal-iconic-cool-grey.jpg client/images/clipsal-iconic-anthracite.jpg client/images/clipsal-iconic-black.jpg _site/images/
-          mkdir -p _site/images/proposal-ranges
-          cp client/images/proposal-ranges/*.jpg _site/images/proposal-ranges/
-          mkdir -p _site/images/clipsal/processed
-          cp -R client/images/clipsal/processed/. _site/images/clipsal/processed/
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          path: _site
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
       - id: deployment
         uses: actions/deploy-pages@v4
