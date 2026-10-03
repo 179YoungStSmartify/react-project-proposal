@@ -12,11 +12,39 @@ test("screen and print preserve prices with neutral pricing wording", async ({
       "$8,500",
       "$12,000",
       "$18,000",
-      "$1,466",
-      "$2,068",
-      "$5,383",
+      "$1,825",
+      "$2,630",
+      "$4,805",
     ])
       await expect(page.getByText(price, { exact: true })).toBeVisible();
+    const network = [
+      ["silver", "UDR7 · 2× U7 Pro APs · PoE+ switch", "$1,825"],
+      [
+        "gold",
+        "Cloud Gateway Ultra · 4× U7 Pro APs · 2.5 GbE PoE+ switch",
+        "$2,630",
+      ],
+      [
+        "platinum",
+        "Cloud Gateway Max · 4× U7 Pro APs · 3× G6 cameras · 2.5 GbE PoE+ switch",
+        "$4,805",
+      ],
+    ];
+    for (const [tier, kit, price] of network) {
+      await expect(page.locator(`#network-${tier}`)).toContainText(kit);
+      await expect(
+        page.locator(`a[href="#/?section=network-${tier}"]`),
+      ).toContainText(`${price} indicative hardware`);
+    }
+    await expect(page.locator("#network-platinum")).toContainText(
+      "3× G6 + up to 2 TB local recording",
+    );
+    await expect(
+      page.getByText(
+        "Network pricing is hardware only, quoted separately from lighting.",
+        { exact: false },
+      ),
+    ).toContainText("Cabling and installation are quoted at the home visit.");
     await expect(page.locator("footer")).toContainText(
       "Prices are confirmed in writing after the home visit",
     );

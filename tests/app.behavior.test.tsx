@@ -7,9 +7,9 @@ describe("proposal experience", () => {
   it("presents the source tiers and matching comparison values", () => {
     render(<App />);
     expect(screen.getByRole("heading", { name: "Silver" })).toBeTruthy();
-    expect(screen.getByText("$1,466")).toBeTruthy();
-    expect(screen.getByText("$2,068")).toBeTruthy();
-    expect(screen.getByText("$5,383")).toBeTruthy();
+    expect(screen.getByText("$1,825")).toBeTruthy();
+    expect(screen.getByText("$2,630")).toBeTruthy();
+    expect(screen.getByText("$4,805")).toBeTruthy();
     expect(screen.getByText(/Cloud Gateway Max/)).toBeTruthy();
     expect(
       screen.getAllByText(

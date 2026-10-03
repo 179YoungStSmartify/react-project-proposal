@@ -75,7 +75,7 @@ try {
   ).toHaveAttribute("aria-selected", "true");
   await page
     .getByRole("link", {
-      name: "Gold Network — $2,068 indicative hardware",
+      name: "Gold Network — $2,630 indicative hardware",
       exact: true,
     })
     .click();

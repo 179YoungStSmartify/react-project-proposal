@@ -77,15 +77,15 @@ export const networkTiers: Tier[] = [
   {
     key: "silver",
     name: "Silver Network",
-    price: "$1,466",
+    price: "$1,825",
     summary:
       "Designed for reliable whole-home coverage, with one access point per floor.",
     specs: [
-      ["Kit", "Dream Router · 2× U7 Pro APs · PoE+ switch"],
+      ["Kit", "UDR7 · 2× U7 Pro APs · PoE+ switch"],
       ["APs", "2 — one per floor"],
-      ["Gateway LAN", "1 GbE"],
+      ["Gateway LAN", "2.5 GbE"],
       ["Wi‑Fi", "Wi‑Fi 7 (802.11be) · 6‑stream tri‑band"],
-      ["IDS/IPS throughput", "1 Gbps"],
+      ["IDS/IPS throughput", "2.3 Gbps"],
       ["Security", "Built‑in IDS/IPS"],
       ["Cameras", "Not included"],
       ["IoT network", "Dedicated VLAN for smart devices"],
@@ -95,7 +95,7 @@ export const networkTiers: Tier[] = [
   {
     key: "gold",
     name: "Gold Network",
-    price: "$2,068",
+    price: "$2,630",
     summary:
       "Dense Wi‑Fi 7, with more access points for denser coverage throughout the home.",
     recommended: true,
@@ -114,19 +114,19 @@ export const networkTiers: Tier[] = [
   {
     key: "platinum",
     name: "Platinum Network",
-    price: "$5,383",
+    price: "$4,805",
     summary: "Local recording, with no ongoing UniFi subscription fee.",
     specs: [
       [
         "Kit",
-        "Cloud Gateway Max · 4× U7 Pro APs · 3× cameras · 2.5 GbE PoE+ switch",
+        "Cloud Gateway Max · 4× U7 Pro APs · 3× G6 cameras · 2.5 GbE PoE+ switch",
       ],
       ["APs", "4 — two per floor"],
       ["Gateway LAN", "2.5 GbE"],
       ["Wi‑Fi", "Wi‑Fi 7 (802.11be) · 6‑stream tri‑band"],
       ["IDS/IPS throughput", "2.3 Gbps"],
       ["Security", "Built‑in IDS/IPS"],
-      ["Cameras", "3× G6 + up to 2TB local recording"],
+      ["Cameras", "3× G6 + up to 2 TB local recording"],
       ["IoT network", "Dedicated VLAN for smart devices"],
       ["Network management", "UniFi app"],
     ],

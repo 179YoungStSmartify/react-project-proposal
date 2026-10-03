@@ -167,7 +167,7 @@ class ProposalTierVisualsTest(unittest.TestCase):
         network_section = re.search(r'<!-- ================= NETWORK PROPOSAL ================= -->(.*?)<!-- ================= COMPARE ================= -->', self.html, re.DOTALL)
         self.assertIsNotNone(network_section)
         expected = {
-            "silver": ("Dream Router", "1 GbE", "1 Gbps"),
+            "silver": ("UDR7", "2.5 GbE", "2.3 Gbps"),
             "gold": ("Cloud Gateway Ultra", "1 GbE", "1 Gbps"),
             "platinum": ("Cloud Gateway Max", "2.5 GbE", "2.3 Gbps"),
         }
@@ -201,8 +201,8 @@ class ProposalTierVisualsTest(unittest.TestCase):
         network_section = re.search(r'<!-- ================= NETWORK PROPOSAL ================= -->(.*?)<!-- ================= COMPARE ================= -->', self.html, re.DOTALL)
         self.assertIsNotNone(network_section)
         platinum = tier_block(network_section.group(1), "platinum")
-        self.assertIn("up to 2TB local recording", platinum)
-        self.assertNotIn("2TB recording</span>", platinum)
+        self.assertIn("up to 2 TB local recording", platinum)
+        self.assertNotIn("2 TB recording</span>", platinum)
 
     def test_back_to_top_button_is_hidden_until_scrolled_down(self):
         button = re.search(r'<button[^>]*id="backToTop"[^>]*>', self.html)
@@ -232,9 +232,9 @@ class ProposalTierVisualsTest(unittest.TestCase):
         self.assertIsNotNone(row)
         self.assertNotIn('class="status-mark included"', row.group(1))
         expected = {
-            "Silver": "$1,466",
-            "Gold": "$2,068",
-            "Platinum": "$5,383",
+            "Silver": "$1,825",
+            "Gold": "$2,630",
+            "Platinum": "$4,805",
         }
         for tier, price in expected.items():
             cell = re.search(r'<td data-label="%s">(.*?)</td>' % tier, row.group(1), re.DOTALL)

@@ -21,9 +21,9 @@ it("uses neutral indicative pricing throughout the proposal and documentation", 
     "$8,500",
     "$12,000",
     "$18,000",
-    "$1,466",
-    "$2,068",
-    "$5,383",
+    "$1,825",
+    "$2,630",
+    "$4,805",
   ])
     expect(screen.getAllByText(price).length).toBeGreaterThan(0);
   expect(
