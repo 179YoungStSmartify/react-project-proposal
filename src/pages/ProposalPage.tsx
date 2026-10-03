@@ -4,7 +4,11 @@ import { TierCards } from "../features/proposal/TierCards";
 import { Finishes } from "../features/proposal/Finishes";
 import { LightingDemo } from "../features/proposal/LightingDemo";
 import { ComparisonTable } from "../features/proposal/ComparisonTable";
-import { integrationScopeNote, networkScopeNote } from "../data";
+import {
+  integrationScopeNote,
+  networkScopeNote,
+  hardwareChoiceNote,
+} from "../data";
 export function ProposalPage() {
   const [showTop, setShowTop] = useState(false);
   useEffect(() => {
@@ -58,11 +62,11 @@ export function ProposalPage() {
           <span className="eyebrow">Three ways to begin</span>
           <h2>Smart-home integration packages</h2>
           <p>
-            Integration, configuration and commissioning services only.{" "}
-            {integrationScopeNote} Indicative proposal pricing. Final quantities
-            and prices are confirmed in writing after the home visit, before
-            ordering.
+            Consultation + integration services only. {integrationScopeNote}{" "}
+            Indicative proposal pricing. Final quantities and prices are
+            confirmed in writing after the home visit, before ordering.
           </p>
+          <p>{hardwareChoiceNote}</p>
         </div>
         <TierCards />
       </section>

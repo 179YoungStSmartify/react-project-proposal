@@ -60,3 +60,38 @@ it("keeps the local source and documentation aligned with the confirmed scope", 
   }
   expect(source).not.toContain("Full control, faster hardware, more sensors.");
 });
+it("prices consultation and integration with client hardware choice constrained by tier", () => {
+  render(<App />);
+  const choice =
+    "Clients choose compatible hardware within their selected tier. Relays with normal light switches require Gold or Platinum. Dimming requires Platinum and compatible lights, confirmed through sample-stage testing.";
+  expect(screen.getByText(choice)).toBeVisible();
+  expect(
+    screen.getByText(/Consultation \+ integration services only/),
+  ).toBeVisible();
+  expect(
+    lightingTiers.map(
+      (t) =>
+        t.specs.find((row) => row[0] === "Relays with normal switches")?.[1],
+    ),
+  ).toEqual(["Not included", "Integration included", "Integration included"]);
+  expect(
+    comparisonRows.find((row) => row[0] === "Relays with normal switches"),
+  ).toEqual([
+    "Relays with normal switches",
+    "Not included",
+    "Integration included",
+    "Integration included",
+  ]);
+  expect(
+    lightingTiers.map((t) => t.specs.find((row) => row[0] === "Dimming")?.[1]),
+  ).toEqual([
+    "Not included",
+    "Not included",
+    "Included, subject to sample-stage testing",
+  ]);
+  for (const text of [source, readme]) expect(text.includes(choice)).toBe(true);
+  for (const tier of lightingTiers) {
+    expect(tier.summary).not.toMatch(/Clipsal|push-button-converted/);
+    expect(tier.specs[0][1]).not.toMatch(/Clipsal|push-button-converted/);
+  }
+});

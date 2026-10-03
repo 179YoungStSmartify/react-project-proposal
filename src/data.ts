@@ -11,13 +11,15 @@ export const integrationScopeNote =
   "Smart-home hardware is excluded and must be purchased or quoted separately. Listed device quantities define integration scope, not hardware supply.";
 export const networkScopeNote =
   "Network packages include the listed hardware. Cabling and installation are excluded and quoted separately.";
+export const hardwareChoiceNote =
+  "Clients choose compatible hardware within their selected tier. Relays with normal light switches require Gold or Platinum. Dimming requires Platinum and compatible lights, confirmed through sample-stage testing.";
 export const lightingTiers: Tier[] = [
   {
     key: "silver",
     name: "Silver",
     price: "$8,500",
     summary:
-      "A considered start: smart-switch integration, local control and essential routines using separately supplied hardware.",
+      "Consultation and on/off smart-switch integration, local control and essential routines using client-selected compatible hardware.",
     specs: [
       ["Lighting", "Integration with basic smart switches"],
       ["Dimming", "Not included"],
@@ -29,6 +31,7 @@ export const lightingTiers: Tier[] = [
       ["Air conditioning", "Integration included"],
       ["Remote access", "Nabu Casa (subscription)"],
       ["Support after handover", "2 months"],
+      ["Relays with normal switches", "Not included"],
     ],
   },
   {
@@ -36,10 +39,13 @@ export const lightingTiers: Tier[] = [
     name: "Gold",
     price: "$12,000",
     summary:
-      "More considered control: integration with push-button-converted switches and the home you already use. Hardware is supplied separately.",
+      "Consultation and integration with client-selected compatible smart switches or relays behind normal light switches. Gold lighting control is on/off only; dimming requires Platinum.",
     recommended: true,
     specs: [
-      ["Lighting", "Integration with push-button-converted switches"],
+      [
+        "Lighting",
+        "On/off smart switches or relays with normal light switches",
+      ],
       ["Dimming", "Not included"],
       ["Wall screens", "2×S, 2×L"],
       ["Automations included", "10"],
@@ -49,6 +55,7 @@ export const lightingTiers: Tier[] = [
       ["Air conditioning", "Integration included"],
       ["Remote access", "Nabu Casa (subscription)"],
       ["Support after handover", "2 months"],
+      ["Relays with normal switches", "Integration included"],
     ],
   },
   {
@@ -56,9 +63,9 @@ export const lightingTiers: Tier[] = [
     name: "Platinum",
     price: "$18,000",
     summary:
-      "Integration with premium switches, dimming configuration and expanded support for a tailored experience. Hardware is supplied separately.",
+      "Consultation and integration with client-selected compatible switches or relays, dimming configuration and expanded support for a tailored experience.",
     specs: [
-      ["Lighting", "Integration with Clipsal premium-range push buttons"],
+      ["Lighting", "Smart switches or relays; dimming integration"],
       ["Dimming", "Included, subject to sample-stage testing"],
       [
         "Wall screens",
@@ -74,6 +81,7 @@ export const lightingTiers: Tier[] = [
         "Support after handover",
         "2 months, priority support, callout fee exempt",
       ],
+      ["Relays with normal switches", "Integration included"],
     ],
   },
 ];
@@ -156,6 +164,13 @@ export const comparisonRows: [string, string, string, string][] = [
     "2×S (small), 1×M (medium), 1×L (large)",
     "2×S, 2×L",
     "2×S, 1×L High Performance (Android), 1×XL High Performance (Android)",
+  ],
+  [
+    "Relays with normal switches",
+    ...(lightingTiers.map(
+      (t) =>
+        t.specs.find((row) => row[0] === "Relays with normal switches")![1],
+    ) as [string, string, string]),
   ],
   [
     "Automations included",

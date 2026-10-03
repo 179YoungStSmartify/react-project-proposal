@@ -14,6 +14,12 @@ test("integration hardware exclusions and network inclusions remain explicit on 
     await expect(
       page.getByRole("heading", { name: "Smart-home integration packages" }),
     ).toBeVisible();
+    await expect(page.locator("#packages .section-heading")).toContainText(
+      "Consultation + integration services only.",
+    );
+    await expect(page.locator("#packages .section-heading")).toContainText(
+      "Clients choose compatible hardware within their selected tier. Relays with normal light switches require Gold or Platinum. Dimming requires Platinum and compatible lights, confirmed through sample-stage testing.",
+    );
     for (let index = 0; index < 3; index++) {
       const card = page.locator(".tier").nth(index);
       await expect(card).toContainText(excluded);
@@ -22,6 +28,18 @@ test("integration hardware exclusions and network inclusions remain explicit on 
         card.getByText("indicative integration", { exact: true }),
       ).toBeVisible();
       await expect(card).toContainText("Integration included");
+      await expect(
+        card
+          .getByText("Relays with normal switches", { exact: true })
+          .locator(".."),
+      ).toContainText(index === 0 ? "Not included" : "Integration included");
+      await expect(
+        card.getByText("Dimming", { exact: true }).locator(".."),
+      ).toContainText(
+        index < 2
+          ? "Not included"
+          : "Included, subject to sample-stage testing",
+      );
     }
     for (const tier of ["silver", "gold", "platinum"]) {
       const card = page.locator(`#network-${tier}`);
@@ -31,14 +49,12 @@ test("integration hardware exclusions and network inclusions remain explicit on 
         card.getByText("indicative hardware", { exact: true }),
       ).toBeVisible();
     }
-    const row = page
-      .getByRole("row")
-      .filter({
-        has: page.getByRole("rowheader", {
-          name: "Smart-home hardware supply",
-          exact: true,
-        }),
-      });
+    const row = page.getByRole("row").filter({
+      has: page.getByRole("rowheader", {
+        name: "Smart-home hardware supply",
+        exact: true,
+      }),
+    });
     await expect(
       row.getByRole("cell", {
         name: "Excluded — supplied separately",
@@ -49,6 +65,9 @@ test("integration hardware exclusions and network inclusions remain explicit on 
     await expect(page.locator("footer")).toContainText(network);
     await expect(page.locator("#finishes")).toContainText(
       "These switches are not included in the integration price.",
+    );
+    await expect(page.locator("#finishes")).toContainText(
+      "These Clipsal ranges are examples, not mandatory hardware choices.",
     );
   }
   await page.emulateMedia({ media: "screen" });

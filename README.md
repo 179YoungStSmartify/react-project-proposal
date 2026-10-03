@@ -21,7 +21,8 @@ The production app is built with Vite at `/react-project-proposal/` for the GitH
 
 ## Commercial scope
 
-Silver, Gold and Platinum are integration, configuration and commissioning service tiers.
+Silver, Gold and Platinum prices cover consultation + integration, not hardware supply.
+Clients choose compatible hardware within their selected tier. Relays with normal light switches require Gold or Platinum. Dimming requires Platinum and compatible lights, confirmed through sample-stage testing.
 Smart-home hardware is excluded and must be purchased or quoted separately. Listed device quantities define integration scope, not hardware supply.
 This includes separately supplied hubs, switches, screens, sensors and controllers; capability inclusions do not promise equipment supply.
 Network packages include the listed hardware. Cabling and installation are excluded and quoted separately.

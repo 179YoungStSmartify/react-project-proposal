@@ -27,9 +27,9 @@ export function Finishes() {
         <span className="eyebrow">The finishing detail</span>
         <h2 id="finish-title">Switch finishes</h2>
         <p>
-          Explore separately supplied Clipsal hardware options for Platinum
-          integration. These switches are not included in the integration price.
-          Other ranges can be requested.
+          These Clipsal ranges are examples, not mandatory hardware choices.
+          Clients may choose other compatible hardware within their tier's
+          constraints. These switches are not included in the integration price.
         </p>
       </div>
       <Tabs
