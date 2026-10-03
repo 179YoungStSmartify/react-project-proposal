@@ -9,7 +9,7 @@ The parent agent owns architectural decisions, integration, QA and release. Dele
 - `src/features/proposal/`: package cards, comparison, finish browser and independent lighting demonstrations.
 - `src/pages/`: ProposalPage, ViewerPage and NetworkPage. Pages compose features; they do not duplicate prices or specification data.
 - `src/lib/`: static-host-safe hash routing, BASE_URL asset resolution and class-name utility.
-- `src/data.ts`: typed proposal content migrated from the historical proposal. Network is separately priced, all prices indicative, and compatibility/compliance remains gated.
+- `src/data.ts`: typed proposal content, integration-only smart-home tiers and shared scope notes. Smart-home hardware is excluded; device counts define integration scope. Separately priced network packages include their listed hardware but exclude cabling/installation. All prices are indicative, and compatibility/compliance remains gated.
 - `public/viewer/index.html`: the actual self-contained upstream 3D viewer, isolated in an iframe and only mounted on the viewer route. Do not rewrite bundled geometry or invent a model.
 
 ## Routing and integrations

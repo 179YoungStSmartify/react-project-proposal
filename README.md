@@ -19,6 +19,14 @@ npm run build
 
 The production app is built with Vite at `/react-project-proposal/` for the GitHub Pages repository subpath. Run `npm run preview` after building to check the production output. The legacy proposal/source HTML and Python tests remain preserved; run `python3 -m unittest discover -s tests -p 'test_*.py'` to exercise those checks where dependencies are available.
 
+## Commercial scope
+
+Silver, Gold and Platinum are integration, configuration and commissioning service tiers.
+Smart-home hardware is excluded and must be purchased or quoted separately. Listed device quantities define integration scope, not hardware supply.
+This includes separately supplied hubs, switches, screens, sensors and controllers; capability inclusions do not promise equipment supply.
+Network packages include the listed hardware. Cabling and installation are excluded and quoted separately.
+Integration and network package prices remain distinct. Switch-finish images illustrate separately purchased hardware, not included products.
+
 ## Structure
 
 - `src/` — React and TypeScript proposal app, data and styling.

@@ -7,22 +7,26 @@ export type Tier = {
   specs: [string, string][];
   recommended?: boolean;
 };
+export const integrationScopeNote =
+  "Smart-home hardware is excluded and must be purchased or quoted separately. Listed device quantities define integration scope, not hardware supply.";
+export const networkScopeNote =
+  "Network packages include the listed hardware. Cabling and installation are excluded and quoted separately.";
 export const lightingTiers: Tier[] = [
   {
     key: "silver",
     name: "Silver",
     price: "$8,500",
     summary:
-      "A considered start: reliable smart switching, local control and the essentials throughout your home.",
+      "A considered start: smart-switch integration, local control and essential routines using separately supplied hardware.",
     specs: [
-      ["Lighting", "Basic smart switch replacement"],
+      ["Lighting", "Integration with basic smart switches"],
       ["Dimming", "Not included"],
       ["Wall screens", "2×S, 1×M, 1×L"],
       ["Automations included", "5"],
       ["Automation capacity", "Up to 20"],
       ["Presence sensing", "Not included"],
-      ["Garage door", "Included"],
-      ["Air conditioning", "Included"],
+      ["Garage door", "Integration included"],
+      ["Air conditioning", "Integration included"],
       ["Remote access", "Nabu Casa (subscription)"],
       ["Support after handover", "2 months"],
     ],
@@ -32,17 +36,17 @@ export const lightingTiers: Tier[] = [
     name: "Gold",
     price: "$12,000",
     summary:
-      "More considered control, with push-button conversion and integrations for the home you already use.",
+      "More considered control: integration with push-button-converted switches and the home you already use. Hardware is supplied separately.",
     recommended: true,
     specs: [
-      ["Lighting", "Existing switches converted to push-button"],
+      ["Lighting", "Integration with push-button-converted switches"],
       ["Dimming", "Not included"],
       ["Wall screens", "2×S, 2×L"],
       ["Automations included", "10"],
       ["Automation capacity", "Up to 20"],
       ["Presence sensing", "Optional extra"],
-      ["Garage door", "Included"],
-      ["Air conditioning", "Included"],
+      ["Garage door", "Integration included"],
+      ["Air conditioning", "Integration included"],
       ["Remote access", "Nabu Casa (subscription)"],
       ["Support after handover", "2 months"],
     ],
@@ -52,9 +56,9 @@ export const lightingTiers: Tier[] = [
     name: "Platinum",
     price: "$18,000",
     summary:
-      "A premium switch finish, dimming capability and expanded support for a more tailored experience.",
+      "Integration with premium switches, dimming configuration and expanded support for a tailored experience. Hardware is supplied separately.",
     specs: [
-      ["Lighting", "Clipsal premium-range push buttons"],
+      ["Lighting", "Integration with Clipsal premium-range push buttons"],
       ["Dimming", "Included, subject to sample-stage testing"],
       [
         "Wall screens",
@@ -63,8 +67,8 @@ export const lightingTiers: Tier[] = [
       ["Automations included", "50"],
       ["Automation capacity", "Unlimited"],
       ["Presence sensing", "Optional extra"],
-      ["Garage door", "Included"],
-      ["Air conditioning", "Included"],
+      ["Garage door", "Integration included"],
+      ["Air conditioning", "Integration included"],
       ["Remote access", "Nabu Casa (subscription)"],
       [
         "Support after handover",
@@ -134,6 +138,12 @@ export const networkTiers: Tier[] = [
 ];
 export const comparisonRows: [string, string, string, string][] = [
   [
+    "Smart-home hardware supply",
+    "Excluded — supplied separately",
+    "Excluded — supplied separately",
+    "Excluded — supplied separately",
+  ],
+  [
     "Lighting",
     ...(lightingTiers.map((t) => t.specs[0][1]) as [string, string, string]),
   ],
@@ -159,8 +169,18 @@ export const comparisonRows: [string, string, string, string][] = [
     "Presence sensing",
     ...(lightingTiers.map((t) => t.specs[5][1]) as [string, string, string]),
   ],
-  ["Garage door", "Included", "Included", "Included"],
-  ["Air conditioning", "Included", "Included", "Included"],
+  [
+    "Garage door",
+    "Integration included",
+    "Integration included",
+    "Integration included",
+  ],
+  [
+    "Air conditioning",
+    "Integration included",
+    "Integration included",
+    "Integration included",
+  ],
   [
     "Home network",
     ...(networkTiers.map(

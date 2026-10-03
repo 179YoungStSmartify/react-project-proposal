@@ -4,6 +4,7 @@ import { TierCards } from "../features/proposal/TierCards";
 import { Finishes } from "../features/proposal/Finishes";
 import { LightingDemo } from "../features/proposal/LightingDemo";
 import { ComparisonTable } from "../features/proposal/ComparisonTable";
+import { integrationScopeNote, networkScopeNote } from "../data";
 export function ProposalPage() {
   const [showTop, setShowTop] = useState(false);
   useEffect(() => {
@@ -23,8 +24,8 @@ export function ProposalPage() {
             A home that feels <em>thoughtfully connected.</em>
           </h1>
           <p>
-            Smart lighting and home control, designed around the way you live —
-            with local-first control, clear choices and room to make it your
+            Smart-home integration and control, designed around the way you live
+            — with local-first control, clear choices and room to make it your
             own.
           </p>
           <div className="hero-actions">
@@ -47,18 +48,20 @@ export function ProposalPage() {
       </section>
       <section className="intro">
         <p>
-          A practical proposal for a more intuitive home. Compare three lighting
-          packages, browse real switch finishes and try the difference between
-          on/off and dimming below.
+          A practical proposal for a more intuitive home. Compare three
+          integration packages, browse separately supplied switch finishes and
+          try the difference between on/off and dimming below.
         </p>
       </section>
       <section className="section" id="packages">
         <div className="section-heading">
           <span className="eyebrow">Three ways to begin</span>
-          <h2>Lighting packages</h2>
+          <h2>Smart-home integration packages</h2>
           <p>
-            Indicative proposal pricing. Final quantities and prices are
-            confirmed in writing after the home visit, before ordering.
+            Integration, configuration and commissioning services only.{" "}
+            {integrationScopeNote} Indicative proposal pricing. Final quantities
+            and prices are confirmed in writing after the home visit, before
+            ordering.
           </p>
         </div>
         <TierCards />
@@ -76,8 +79,10 @@ export function ProposalPage() {
           </p>
           <ul className="clean-list">
             <li>Lights, dimmed on Platinum</li>
-            <li>Wall screens on all tiers</li>
-            <li>Garage door and air conditioning on all tiers</li>
+            <li>
+              Wall-screen integration on all tiers; devices supplied separately
+            </li>
+            <li>Garage door and air conditioning integration on all tiers</li>
           </ul>
           <p>
             Remote access is available through a paid Nabu Casa Home Assistant
@@ -96,7 +101,8 @@ export function ProposalPage() {
           <span>IT CONTROLS</span>
           <strong>Lighting · Garage · Air conditioning</strong>
           <small>
-            Local-first routines; optional remote access requires subscription.
+            Hub and control hardware supplied separately. Local-first routines;
+            optional remote access requires subscription.
           </small>
         </div>
       </section>
@@ -114,6 +120,7 @@ export function ProposalPage() {
         <p className="small-note">
           Network pricing is hardware only, quoted separately from lighting.
           Cabling and installation are quoted at the home visit.{" "}
+          {networkScopeNote}{" "}
           <a href="https://design.ui.com" target="_blank" rel="noreferrer">
             UniFi Design Center ↗
           </a>
@@ -198,12 +205,13 @@ export function ProposalPage() {
       <footer>
         <strong>Proposal draft · indicative pricing</strong>
         <p>
-          Prices are confirmed in writing after the home visit, before anything
-          is ordered. Dimming is tested in your home during the sample stage.
-          Network is quoted separately alongside your lighting tier. Garage
-          automatic close must not be enabled until a safety beam/photo-eye has
-          been verified and function-tested on site. Safety interlocks remain in
-          the opener; suitability is not represented as already verified.
+          {integrationScopeNote} {networkScopeNote} Prices are confirmed in
+          writing after the home visit, before anything is ordered. Dimming is
+          tested in your home during the sample stage. Network is quoted
+          separately alongside your lighting tier. Garage automatic close must
+          not be enabled until a safety beam/photo-eye has been verified and
+          function-tested on site. Safety interlocks remain in the opener;
+          suitability is not represented as already verified.
         </p>
         <p>
           Prepared by Sam Lee &amp; Angus Wong · Proposal date: 25 September

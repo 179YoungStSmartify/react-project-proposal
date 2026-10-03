@@ -1,4 +1,4 @@
-import { validProjectUrl } from "../data";
+import { validProjectUrl, networkScopeNote } from "../data";
 import { TierCards } from "../features/proposal/TierCards";
 export function NetworkPage() {
   const design = validProjectUrl(import.meta.env.VITE_UNIFI_PROJECT_URL);
@@ -8,8 +8,9 @@ export function NetworkPage() {
         <span className="eyebrow">Connectivity</span>
         <h1>Network design</h1>
         <p>
-          Home network options are separately quoted as indicative hardware.
-          Final coverage is confirmed after the site survey.
+          {networkScopeNote} Home network options are separately quoted as
+          indicative hardware. Final coverage is confirmed after the site
+          survey.
         </p>
       </div>
       <div className="network-link-card">
