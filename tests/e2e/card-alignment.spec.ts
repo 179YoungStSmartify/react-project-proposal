@@ -1,14 +1,20 @@
 import { test, expect, openProposal, navigate } from "./fixtures";
 import type { Page } from "@playwright/test";
 
-async function expectAlignedGroups(page: Page, expectedSpecCounts = [12, 9]) {
+async function expectAlignedGroups(
+  page: Page,
+  expectedGroups = [
+    { specCount: 12, scopeNoteCount: 0 },
+    { specCount: 9, scopeNoteCount: 1 },
+  ],
+) {
   const cardGroups = page.locator(".cards");
-  await expect(cardGroups).toHaveCount(expectedSpecCounts.length);
+  await expect(cardGroups).toHaveCount(expectedGroups.length);
   for (const [groupIndex, group] of (await cardGroups.all()).entries()) {
     await expect
       .poll(
         async () =>
-          group.evaluate((element, expectedSpecCount) => {
+          group.evaluate((element, { specCount, scopeNoteCount }) => {
             const cards = Array.from(
               element.querySelectorAll(":scope > .tier"),
             );
@@ -33,7 +39,11 @@ async function expectAlignedGroups(page: Page, expectedSpecCounts = [12, 9]) {
             for (const selector of selectors) {
               const groups = rects(selector);
               const expectedCount =
-                selector === "dl > div" ? expectedSpecCount : 1;
+                selector === "dl > div"
+                  ? specCount
+                  : selector === ".small-note"
+                    ? scopeNoteCount
+                    : 1;
               if (groups.some((rows) => rows.length !== expectedCount))
                 return Infinity;
               for (let i = 0; i < groups[0].length; i++) {
@@ -47,7 +57,7 @@ async function expectAlignedGroups(page: Page, expectedSpecCounts = [12, 9]) {
               }
             }
             return error;
-          }, expectedSpecCounts[groupIndex]),
+          }, expectedGroups[groupIndex]),
         {
           message:
             "corresponding card rows must share top positions and heights",
@@ -81,9 +91,9 @@ test("side-by-side service and network cards share every row height on screen an
   await expectAlignedGroups(page);
   await page.emulateMedia({ media: "screen" });
   await navigate(page, "Network design");
-  await expectAlignedGroups(page, [9]);
+  await expectAlignedGroups(page, [{ specCount: 9, scopeNoteCount: 1 }]);
   await page.emulateMedia({ media: "print" });
-  await expectAlignedGroups(page, [9]);
+  await expectAlignedGroups(page, [{ specCount: 9, scopeNoteCount: 1 }]);
 });
 
 test("card row alignment adapts to wrapping and returns to compact stacked mobile rows", async ({
@@ -146,7 +156,7 @@ test("card row alignment adapts to wrapping and returns to compact stacked mobil
         );
       dd.style.fontSize = "20px";
     });
-  await expectAlignedGroups(page, [9]);
+  await expectAlignedGroups(page, [{ specCount: 9, scopeNoteCount: 1 }]);
   await page.emulateMedia({ media: "print" });
-  await expectAlignedGroups(page, [9]);
+  await expectAlignedGroups(page, [{ specCount: 9, scopeNoteCount: 1 }]);
 });

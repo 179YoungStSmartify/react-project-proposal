@@ -1,11 +1,5 @@
 import type { CSSProperties } from "react";
-import {
-  lightingTiers,
-  networkTiers,
-  integrationScopeNote,
-  serviceScopeNote,
-  networkScopeNote,
-} from "../../data";
+import { lightingTiers, networkTiers, networkScopeNote } from "../../data";
 import { Card } from "../../components/ui/card";
 import { Badge } from "../../components/ui/badge";
 export function TierCards({ network = false }: { network?: boolean }) {
@@ -13,7 +7,7 @@ export function TierCards({ network = false }: { network?: boolean }) {
   const specCount = tiers[0].specs.length;
   const cardsStyle = {
     "--tier-spec-count": specCount,
-    "--tier-track-count": specCount + 6,
+    "--tier-track-count": specCount + (network ? 6 : 5),
   } as CSSProperties;
   return (
     <div className="cards" style={cardsStyle}>
@@ -41,11 +35,7 @@ export function TierCards({ network = false }: { network?: boolean }) {
                 </div>
               ))}
             </dl>
-            <p className="small-note">
-              {network
-                ? networkScopeNote
-                : `${serviceScopeNote} ${integrationScopeNote}`}
-            </p>
+            {network && <p className="small-note">{networkScopeNote}</p>}
             <div className="price">
               <strong>{t.price}</strong>
               <span>

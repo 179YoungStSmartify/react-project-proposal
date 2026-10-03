@@ -37,8 +37,9 @@ test("included core hardware and excluded lighting hardware remain explicit on s
     );
     for (let index = 0; index < 3; index++) {
       const card = page.locator(".tier").nth(index);
-      await expect(card).toContainText(excluded);
-      await expect(card).toContainText(included);
+      await expect(card).not.toContainText(excluded);
+      await expect(card).not.toContainText(included);
+      await expect(card.locator(".small-note")).toHaveCount(0);
       await expect(
         card.getByText("Wall screens", { exact: true }).locator(".."),
       ).toContainText(quantities[index]);

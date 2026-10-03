@@ -48,10 +48,11 @@ it("names included core hardware and excluded client-selected lighting hardware"
   const cards = Array.from(document.querySelectorAll<HTMLElement>(".tier"));
   expect(cards).toHaveLength(6);
   for (const card of cards.slice(0, 3)) {
-    expect(card).toHaveTextContent(included);
-    expect(card).toHaveTextContent(
+    expect(card).not.toHaveTextContent(included);
+    expect(card).not.toHaveTextContent(
       "Consultation + installation + integration services.",
     );
+    expect(card.querySelector(".small-note")).toBeNull();
     expect(within(card).getByText("Service package")).toBeVisible();
     expect(within(card).getByText("indicative package")).toBeVisible();
   }
@@ -60,6 +61,10 @@ it("names included core hardware and excluded client-selected lighting hardware"
     expect(card).not.toHaveTextContent(included);
     expect(within(card).getByText("indicative hardware")).toBeVisible();
   }
+  expect(
+    document.querySelector("#packages .section-heading"),
+  ).toHaveTextContent(included);
+  expect(document.querySelector("footer")).toHaveTextContent(included);
   expect(
     screen.getByRole("heading", { name: "Smart-home service tiers" }),
   ).toBeVisible();
@@ -121,7 +126,9 @@ it("keeps the derivative and docs aligned without restoring the removed gallery"
   expect(source).not.toContain("var finishRanges");
   const parsedSource = new DOMParser().parseFromString(source, "text/html");
   const sourceCards = Array.from(
-    parsedSource.querySelectorAll('.tiers > .tier[data-tier]:not([id^="network-"])'),
+    parsedSource.querySelectorAll(
+      '.tiers > .tier[data-tier]:not([id^="network-"])',
+    ),
   );
   expect(sourceCards).toHaveLength(3);
   for (const [index, card] of sourceCards.entries()) {
