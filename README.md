@@ -21,9 +21,9 @@ The production app is built with Vite at `/react-project-proposal/` for the GitH
 
 ## Commercial scope
 
-Silver, Gold and Platinum prices are indicative package prices covering consultation + installation + integration plus the listed wall-screen hardware and one smart-home hub (HA Green or mini PC).
+Silver, Gold and Platinum prices are indicative package prices covering consultation + installation + integration plus the listed wall-screen hardware and one smart-home hub.
 Clients choose compatible hardware within their selected tier. Relays with normal light switches require Gold or Platinum. Dimming requires Platinum and compatible lights, confirmed through sample-stage testing.
-Listed wall-screen hardware and one smart-home hub (HA Green or mini PC) are included. Switches, relays and wall plates are excluded and purchased separately. The exact wall-screen quantities listed in each tier are included hardware; the hub choice is confirmed for the project.
+Listed wall-screen hardware and one smart-home hub are included: HA Green for Silver and Gold; mini PC for Platinum. Switches, relays and wall plates are excluded and purchased separately.
 Network packages include the listed hardware. Cabling and installation are excluded and quoted separately.
 Service-tier and network-hardware prices remain distinct. Switch/wall-plate examples have been removed; clients choose compatible hardware within their tier's constraints. All electrical work requires appropriately licensed electricians, and compatibility/compliance must be verified before installation.
 

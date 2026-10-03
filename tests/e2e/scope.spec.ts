@@ -4,9 +4,19 @@ test("included core hardware and excluded lighting hardware remain explicit on s
 }) => {
   await openProposal(page);
   const included =
-    "Listed wall-screen hardware and one smart-home hub (HA Green or mini PC) are included.";
+    "Listed wall-screen hardware and one smart-home hub are included: HA Green for Silver and Gold; mini PC for Platinum.";
   const excluded =
     "Switches, relays and wall plates are excluded and purchased separately.";
+  const hubs = [
+    "One HA Green included",
+    "One HA Green included",
+    "One mini PC included",
+  ];
+  const hubCells = [
+    "Included — one HA Green",
+    "Included — one HA Green",
+    "Included — one mini PC",
+  ];
   const quantities = [
     "2×S, 1×M, 1×L",
     "2×S, 2×L",
@@ -36,7 +46,7 @@ test("included core hardware and excluded lighting hardware remain explicit on s
         card
           .getByText("Smart-home hub hardware", { exact: true })
           .locator(".."),
-      ).toContainText("One hub included (HA Green or mini PC)");
+      ).toContainText(hubs[index]);
       await expect(
         card.getByText("indicative package", { exact: true }),
       ).toBeVisible();
@@ -79,20 +89,21 @@ test("included core hardware and excluded lighting hardware remain explicit on s
     );
     await expect(page.locator("footer")).toContainText(included);
     await expect(page.locator("footer")).toContainText(excluded);
-    const hubRow = page
-      .getByRole("row")
-      .filter({
-        has: page.getByRole("rowheader", {
-          name: "Smart-home hub hardware",
-          exact: true,
-        }),
-      });
-    await expect(
-      hubRow.getByRole("cell", {
-        name: "Included — one hub (HA Green or mini PC)",
+    const hubRow = page.getByRole("row").filter({
+      has: page.getByRole("rowheader", {
+        name: "Smart-home hub hardware",
         exact: true,
       }),
-    ).toHaveCount(3);
+    });
+    await expect(hubRow.getByRole("cell")).toHaveText(hubCells);
+    for (const [hub, count] of [
+      ["Included — one HA Green", 2],
+      ["Included — one mini PC", 1],
+    ] as const) {
+      await expect(
+        hubRow.getByRole("cell", { name: hub, exact: true }),
+      ).toHaveCount(count);
+    }
     await expect(page.locator("table caption")).toContainText("wall-screen");
     await expect(page.locator("footer")).toContainText(network);
     await expect(page.locator("#finishes")).toHaveCount(0);

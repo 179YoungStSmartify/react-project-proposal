@@ -23,11 +23,11 @@ export function ComparisonTable() {
         <Table>
           <TableCaption>
             Consultation, installation and integration services. Listed
-            wall-screen hardware and one smart-home hub (HA Green or mini PC)
-            are included; switches, relays and wall plates are excluded and
-            client supplied. Network packages include their listed hardware and
-            are priced separately; cabling and installation are excluded. All
-            prices are indicative.
+            wall-screen hardware and one smart-home hub are included: HA Green
+            for Silver and Gold; mini PC for Platinum. Switches, relays and wall
+            plates are excluded and client supplied. Network packages include
+            their listed hardware and are priced separately; cabling and
+            installation are excluded. All prices are indicative.
           </TableCaption>
           <TableHeader>
             <TableRow>

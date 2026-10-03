@@ -8,7 +8,7 @@ export type Tier = {
   recommended?: boolean;
 };
 export const integrationScopeNote =
-  "Listed wall-screen hardware and one smart-home hub (HA Green or mini PC) are included. Switches, relays and wall plates are excluded and purchased separately.";
+  "Listed wall-screen hardware and one smart-home hub are included: HA Green for Silver and Gold; mini PC for Platinum. Switches, relays and wall plates are excluded and purchased separately.";
 export const serviceScopeNote =
   "Consultation + installation + integration services.";
 export const networkScopeNote =
@@ -34,7 +34,7 @@ export const lightingTiers: Tier[] = [
       ["Remote access", "Nabu Casa (subscription)"],
       ["Support after handover", "2 months"],
       ["Relays with normal switches", "Not included"],
-      ["Smart-home hub hardware", "One hub included (HA Green or mini PC)"],
+      ["Smart-home hub hardware", "One HA Green included"],
     ],
   },
   {
@@ -59,7 +59,7 @@ export const lightingTiers: Tier[] = [
       ["Remote access", "Nabu Casa (subscription)"],
       ["Support after handover", "2 months"],
       ["Relays with normal switches", "Integration included"],
-      ["Smart-home hub hardware", "One hub included (HA Green or mini PC)"],
+      ["Smart-home hub hardware", "One HA Green included"],
     ],
   },
   {
@@ -86,7 +86,7 @@ export const lightingTiers: Tier[] = [
         "2 months, priority support, callout fee exempt",
       ],
       ["Relays with normal switches", "Integration included"],
-      ["Smart-home hub hardware", "One hub included (HA Green or mini PC)"],
+      ["Smart-home hub hardware", "One mini PC included"],
     ],
   },
 ];
@@ -152,9 +152,9 @@ export const networkTiers: Tier[] = [
 export const comparisonRows: [string, string, string, string][] = [
   [
     "Smart-home hub hardware",
-    "Included — one hub (HA Green or mini PC)",
-    "Included — one hub (HA Green or mini PC)",
-    "Included — one hub (HA Green or mini PC)",
+    "Included — one HA Green",
+    "Included — one HA Green",
+    "Included — one mini PC",
   ],
   [
     "Switches, relays and wall plates",

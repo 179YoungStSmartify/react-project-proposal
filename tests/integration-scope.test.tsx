@@ -5,9 +5,44 @@ import { comparisonRows, lightingTiers, networkTiers } from "../src/data";
 import source from "../client/proposal-tiers.html?raw";
 import readme from "../README.md?raw";
 const included =
-  "Listed wall-screen hardware and one smart-home hub (HA Green or mini PC) are included. Switches, relays and wall plates are excluded and purchased separately.";
+  "Listed wall-screen hardware and one smart-home hub are included: HA Green for Silver and Gold; mini PC for Platinum. Switches, relays and wall plates are excluded and purchased separately.";
 const network =
   "Network packages include the listed hardware. Cabling and installation are excluded and quoted separately.";
+it("includes one HA Green in Silver and Gold and one mini PC in Platinum", () => {
+  const hubs = [
+    "One HA Green included",
+    "One HA Green included",
+    "One mini PC included",
+  ];
+  expect(
+    lightingTiers.map(
+      (tier) =>
+        tier.specs.find(([label]) => label === "Smart-home hub hardware")?.[1],
+    ),
+  ).toEqual(hubs);
+  render(<App />);
+  const cards = Array.from(
+    document.querySelectorAll<HTMLElement>("#packages .tier"),
+  );
+  expect(cards).toHaveLength(3);
+  cards.forEach((card, index) => {
+    expect(within(card).getByText(hubs[index], { exact: true })).toBeVisible();
+  });
+  expect(
+    comparisonRows
+      .find(([label]) => label === "Smart-home hub hardware")
+      ?.slice(1),
+  ).toEqual([
+    "Included — one HA Green",
+    "Included — one HA Green",
+    "Included — one mini PC",
+  ]);
+  for (const tier of networkTiers) {
+    expect(
+      tier.specs.some(([label]) => label === "Smart-home hub hardware"),
+    ).toBe(false);
+  }
+});
 it("names included core hardware and excluded client-selected lighting hardware", () => {
   render(<App />);
   const cards = Array.from(document.querySelectorAll<HTMLElement>(".tier"));
@@ -33,9 +68,9 @@ it("names included core hardware and excluded client-selected lighting hardware"
       .find((row) => row[0] === "Smart-home hub hardware")
       ?.slice(1),
   ).toEqual([
-    "Included — one hub (HA Green or mini PC)",
-    "Included — one hub (HA Green or mini PC)",
-    "Included — one hub (HA Green or mini PC)",
+    "Included — one HA Green",
+    "Included — one HA Green",
+    "Included — one mini PC",
   ]);
   expect(
     comparisonRows
@@ -84,6 +119,36 @@ it("keeps the derivative and docs aligned without restoring the removed gallery"
   expect(source).not.toContain('<section class="finish-panel"');
   expect(source).not.toContain('id="finishImage"');
   expect(source).not.toContain("var finishRanges");
+  const parsedSource = new DOMParser().parseFromString(source, "text/html");
+  const sourceCards = Array.from(
+    parsedSource.querySelectorAll('.tiers > .tier[data-tier]:not([id^="network-"])'),
+  );
+  expect(sourceCards).toHaveLength(3);
+  for (const [index, card] of sourceCards.entries()) {
+    expect(card.textContent).toContain(
+      [
+        "One HA Green included",
+        "One HA Green included",
+        "One mini PC included",
+      ][index],
+    );
+  }
+  const sourceHubRow = Array.from(
+    parsedSource.querySelectorAll("table tr"),
+  ).find(
+    (row) =>
+      row.querySelector("td")?.textContent?.trim() ===
+      "Smart-home hub hardware",
+  );
+  expect(
+    Array.from(sourceHubRow?.querySelectorAll("td[data-label]") ?? []).map(
+      (cell) => cell.textContent?.trim(),
+    ),
+  ).toEqual([
+    "Included — one HA Green",
+    "Included — one HA Green",
+    "Included — one mini PC",
+  ]);
 });
 it("preserves tier constraints and network differentiation", () => {
   render(<App />);
