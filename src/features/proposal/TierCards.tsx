@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import {
   lightingTiers,
   networkTiers,
@@ -9,8 +10,13 @@ import { Card } from "../../components/ui/card";
 import { Badge } from "../../components/ui/badge";
 export function TierCards({ network = false }: { network?: boolean }) {
   const tiers = network ? networkTiers : lightingTiers;
+  const specCount = tiers[0].specs.length;
+  const cardsStyle = {
+    "--tier-spec-count": specCount,
+    "--tier-track-count": specCount + 6,
+  } as CSSProperties;
   return (
-    <div className="cards">
+    <div className="cards" style={cardsStyle}>
       {tiers.map((t) => (
         <Card
           role="article"

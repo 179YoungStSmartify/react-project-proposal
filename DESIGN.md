@@ -25,7 +25,7 @@ Do not reuse semantic `--muted` (surface) as a text colour. Legacy layout tokens
 ## Shared components
 
 - Button: common actions, linked calls to action, print and independent light controls.
-- Card and Badge: equal-height Silver/Gold/Platinum service tiers and separate network hardware packages; recommendation inside the Gold band.
+- Card and Badge: Silver/Gold/Platinum service tiers and separate network hardware packages share row heights when side by side. Each heading, summary, corresponding specification, scope note and price track uses the tallest content across the three cards—not a guessed fixed height. CSS row subgrids handle wrapping, fonts and resizing automatically; stacked screen cards keep natural, independent row heights. Print uses the shared three-column alignment. Recommendation stays inside the Gold band.
 - Tabs: retained reusable UI primitive, currently unused; the switch/wall-plate gallery is removed.
 - Sheet: mobile navigation with focus trap, Escape dismissal, labelled title and focus restoration.
 - Slider: keyboard-accessible brightness, explicit accessible name on its thumb; independent of the instant-light demo.

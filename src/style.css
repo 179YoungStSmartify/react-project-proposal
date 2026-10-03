@@ -1036,3 +1036,31 @@ footer button {
     border-radius: 0;
   }
 }
+
+@media (min-width: 901px), print {
+  .cards {
+    row-gap: 0;
+    grid-template-rows: repeat(var(--tier-track-count), auto);
+  }
+
+  .cards > .tier {
+    display: grid;
+    grid-row: span var(--tier-track-count);
+    grid-template-rows: subgrid;
+    row-gap: 0;
+  }
+
+  .tier-content {
+    display: grid;
+    grid-row: 2 / -1;
+    grid-template-rows: subgrid;
+    row-gap: 0;
+  }
+
+  .tier-content > dl {
+    display: grid;
+    grid-row: span var(--tier-spec-count);
+    grid-template-rows: subgrid;
+    row-gap: 0;
+  }
+}
