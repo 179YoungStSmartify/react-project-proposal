@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Button } from "../components/ui/button";
 import { TierCards } from "../features/proposal/TierCards";
-import { Finishes } from "../features/proposal/Finishes";
+
 import { LightingDemo } from "../features/proposal/LightingDemo";
 import { ComparisonTable } from "../features/proposal/ComparisonTable";
 import {
   integrationScopeNote,
+  serviceScopeNote,
   networkScopeNote,
   hardwareChoiceNote,
 } from "../data";
@@ -52,25 +53,24 @@ export function ProposalPage() {
       </section>
       <section className="intro">
         <p>
-          A practical proposal for a more intuitive home. Compare three
-          integration packages, browse separately supplied switch finishes and
-          try the difference between on/off and dimming below.
+          A practical proposal for a more intuitive home. Compare three service
+          tiers and try the difference between on/off and dimming below.
         </p>
       </section>
       <section className="section" id="packages">
         <div className="section-heading">
           <span className="eyebrow">Three ways to begin</span>
-          <h2>Smart-home integration packages</h2>
+          <h2>Smart-home service tiers</h2>
           <p>
-            Consultation + integration services only. {integrationScopeNote}{" "}
-            Indicative proposal pricing. Final quantities and prices are
-            confirmed in writing after the home visit, before ordering.
+            {serviceScopeNote} {integrationScopeNote} Indicative proposal
+            pricing. Final quantities and prices are confirmed in writing after
+            the home visit, before ordering.
           </p>
           <p>{hardwareChoiceNote}</p>
         </div>
         <TierCards />
       </section>
-      <Finishes />
+
       <LightingDemo />
       <section className="section split">
         <div>
@@ -209,13 +209,13 @@ export function ProposalPage() {
       <footer>
         <strong>Proposal draft · indicative pricing</strong>
         <p>
-          {integrationScopeNote} {networkScopeNote} Prices are confirmed in
-          writing after the home visit, before anything is ordered. Dimming is
-          tested in your home during the sample stage. Network is quoted
-          separately alongside your lighting tier. Garage automatic close must
-          not be enabled until a safety beam/photo-eye has been verified and
-          function-tested on site. Safety interlocks remain in the opener;
-          suitability is not represented as already verified.
+          {serviceScopeNote} {integrationScopeNote} {networkScopeNote} Prices
+          are confirmed in writing after the home visit, before anything is
+          ordered. Dimming is tested in your home during the sample stage.
+          Network is quoted separately alongside your lighting tier. Garage
+          automatic close must not be enabled until a safety beam/photo-eye has
+          been verified and function-tested on site. Safety interlocks remain in
+          the opener; suitability is not represented as already verified.
         </p>
         <p>
           Prepared by Sam Lee &amp; Angus Wong · Proposal date: 25 September

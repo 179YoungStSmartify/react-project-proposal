@@ -25,8 +25,8 @@ Do not reuse semantic `--muted` (surface) as a text colour. Legacy layout tokens
 ## Shared components
 
 - Button: common actions, linked calls to action, print and independent light controls.
-- Card and Badge: equal-height Silver/Gold/Platinum lighting and network packages; recommendation inside the Gold band.
-- Tabs: Radix keyboard-managed finish ranges, Home/End and arrow keys; responsive wrapping, selected styling and live carousel captions.
+- Card and Badge: equal-height Silver/Gold/Platinum service tiers and separate network hardware packages; recommendation inside the Gold band.
+- Tabs: retained reusable UI primitive, currently unused; the switch/wall-plate gallery is removed.
 - Sheet: mobile navigation with focus trap, Escape dismissal, labelled title and focus restoration.
 - Slider: keyboard-accessible brightness, explicit accessible name on its thumb; independent of the instant-light demo.
 - Table: shared comparison primitives with row headings, caption and contained horizontal scrolling.
@@ -41,4 +41,4 @@ Use visible focus rings, semantic landmarks, a functional focus-moving skip link
 
 ## Verification
 
-`npm test`, `npm run lint`, `npm run typecheck`, `npm run build`; `tests/browser-smoke.mjs` exercises the production hosting prefix, keyboard and mobile navigation, every finish image, independent demos, section scrolling, real viewer controls/GLB download, teardown and print.
+`npm test`, `npm run lint`, `npm run typecheck`, `npm run build`; `tests/browser-smoke.mjs` exercises the production hosting prefix, keyboard and mobile navigation, gallery-removal assertions, independent demos, section scrolling, real viewer controls/GLB download, teardown and print.

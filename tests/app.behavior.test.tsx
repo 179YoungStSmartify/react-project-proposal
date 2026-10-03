@@ -26,17 +26,19 @@ describe("proposal experience", () => {
       screen.getAllByText("Nabu Casa (subscription)").length,
     ).toBeGreaterThan(0);
   });
-  it("selects finishes by tabs and carousel controls", async () => {
+  it("removes wall-plate examples while preserving the lighting demonstration", () => {
     render(<App />);
-    const tabs = screen.getAllByRole("tab");
-    tabs[0].focus();
-    fireEvent.keyDown(tabs[0], { key: "End" });
-    await waitFor(() =>
-      expect(tabs[3].getAttribute("aria-selected")).toBe("true"),
-    );
-    expect(screen.getByText("1 / 2")).toBeTruthy();
-    fireEvent.click(screen.getByRole("button", { name: /Next Solis colour/ }));
-    expect(screen.getByText("2 / 2")).toBeTruthy();
+    expect(
+      screen.queryByRole("heading", { name: "Switch finishes" }),
+    ).toBeNull();
+    expect(screen.queryByRole("tablist")).toBeNull();
+    expect(screen.queryByAltText(/Clipsal.*switch/i)).toBeNull();
+    expect(
+      screen.getByRole("button", { name: "Toggle instant light" }),
+    ).toBeVisible();
+    expect(
+      screen.getByRole("button", { name: "Toggle dimmable light" }),
+    ).toBeVisible();
   });
   it("keeps instant and dimmable demo lights independent", () => {
     render(<App />);

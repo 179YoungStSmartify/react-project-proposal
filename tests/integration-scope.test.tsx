@@ -10,15 +10,18 @@ const quantities =
   "Listed device quantities define integration scope, not hardware supply.";
 const network =
   "Network packages include the listed hardware. Cabling and installation are excluded and quoted separately.";
-it("distinguishes integration-only services from network hardware in every card and comparison", () => {
+it("distinguishes smart-home services excluding hardware from network hardware in every card and comparison", () => {
   render(<App />);
   const cards = Array.from(document.querySelectorAll<HTMLElement>(".tier"));
   expect(cards).toHaveLength(6);
   for (const card of cards.slice(0, 3)) {
     expect(card).toHaveTextContent(excluded);
     expect(card).toHaveTextContent(quantities);
-    expect(within(card).getByText("Integration package")).toBeVisible();
-    expect(within(card).getByText("indicative integration")).toBeVisible();
+    expect(card).toHaveTextContent(
+      "Consultation + installation + integration services.",
+    );
+    expect(within(card).getByText("Service package")).toBeVisible();
+    expect(within(card).getByText("indicative services")).toBeVisible();
   }
   for (const card of cards.slice(3)) {
     expect(card).toHaveTextContent(network);
@@ -26,7 +29,7 @@ it("distinguishes integration-only services from network hardware in every card 
     expect(within(card).getByText("indicative hardware")).toBeVisible();
   }
   expect(
-    screen.getByRole("heading", { name: "Smart-home integration packages" }),
+    screen.getByRole("heading", { name: "Smart-home service tiers" }),
   ).toBeVisible();
   expect(
     comparisonRows.find((row) => row[0] === "Smart-home hardware supply"),
@@ -57,17 +60,22 @@ it("keeps the local source and documentation aligned with the confirmed scope", 
     expect(text).toContain(excluded);
     expect(text).toContain(quantities);
     expect(text).toContain(network);
+    expect(text).toMatch(/consultation \+ installation \+ integration/i);
   }
   expect(source).not.toContain("Full control, faster hardware, more sensors.");
+  expect(source).not.toContain('<section class="finish-panel"');
+  expect(source).not.toContain('id="finishImage"');
+  expect(source).not.toContain("var finishRanges");
 });
-it("prices consultation and integration with client hardware choice constrained by tier", () => {
+it("prices consultation, installation and integration with tier-constrained client hardware choice", () => {
   render(<App />);
   const choice =
     "Clients choose compatible hardware within their selected tier. Relays with normal light switches require Gold or Platinum. Dimming requires Platinum and compatible lights, confirmed through sample-stage testing.";
   expect(screen.getByText(choice)).toBeVisible();
   expect(
-    screen.getByText(/Consultation \+ integration services only/),
-  ).toBeVisible();
+    screen.getByRole("heading", { name: "Smart-home service tiers" })
+      .parentElement,
+  ).toHaveTextContent("Consultation + installation + integration services.");
   expect(
     lightingTiers.map(
       (t) =>

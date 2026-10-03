@@ -17,7 +17,7 @@ page.on("pageerror", (e) => errors.push(String(e)));
 page.on("console", (m) => {
   if (m.type() === "error") errors.push(m.text());
 });
-const report = { base, widths: [], finishes: [] };
+const report = { base, widths: [], wallPlateExamplesRemoved: false };
 try {
   await page.goto(base, { waitUntil: "networkidle" });
   await page.evaluate(() => document.fonts.ready);
@@ -48,31 +48,16 @@ try {
     page.getByRole("button", { name: "Toggle instant light", exact: true }),
   ).toHaveAttribute("aria-pressed", "true");
   report.independentLights = true;
-  for (const [range, count] of [
-    ["Iconic Styl", 3],
-    ["Iconic Essence", 2],
-    ["Saturn Zen", 2],
-    ["Solis", 2],
-  ]) {
-    await page.getByRole("tab", { name: range, exact: true }).click();
-    for (let i = 0; i < count; i++) {
-      const image = page.locator(".carousel img:visible");
-      await expect
-        .poll(() => image.evaluate((e) => e.complete && e.naturalWidth > 0))
-        .toBe(true);
-      report.finishes.push({
-        range,
-        caption: await page.locator("figcaption:visible").innerText(),
-        src: await image.getAttribute("src"),
-      });
-      await page.getByRole("button", { name: `Next ${range} colour` }).click();
-    }
-  }
-  await page.getByRole("tab", { name: "Iconic Styl", exact: true }).focus();
-  await page.keyboard.press("End");
+  await expect(page.locator("#finishes")).toHaveCount(0);
+  await expect(page.getByRole("tablist")).toHaveCount(0);
   await expect(
-    page.getByRole("tab", { name: "Solis", exact: true }),
-  ).toHaveAttribute("aria-selected", "true");
+    page.getByRole("heading", { name: "Switch finishes" }),
+  ).toHaveCount(0);
+  await expect(page.locator("#packages .section-heading")).toContainText(
+    "Consultation + installation + integration services.",
+  );
+  report.wallPlateExamplesRemoved = true;
+  report.serviceScope = true;
   await page
     .getByRole("link", {
       name: "Gold Network — $2,630 indicative hardware",

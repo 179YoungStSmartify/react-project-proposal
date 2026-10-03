@@ -10,10 +10,9 @@ it("uses the shared shadcn Button primitive for interactive lighting controls", 
     screen.getByRole("button", { name: "Toggle instant light" }),
   ).toHaveAttribute("data-slot", "button");
 });
-it("uses Radix-backed shadcn tabs for finish selection", () => {
+it("uses the shared accessible Radix slider for dimmable brightness", () => {
   render(<App />);
-  expect(screen.getByRole("tab", { name: "Iconic Styl" })).toHaveAttribute(
-    "data-slot",
-    "tabs-trigger",
-  );
+  expect(
+    screen.getByRole("slider", { name: "Dimmable brightness" }),
+  ).toHaveAttribute("data-slot", "slider-thumb");
 });

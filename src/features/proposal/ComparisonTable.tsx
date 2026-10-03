@@ -22,11 +22,11 @@ export function ComparisonTable() {
       >
         <Table>
           <TableCaption>
-            Consultation and integration services only; smart-home hardware is
-            excluded. Device quantities describe integration scope, not hardware
-            supply. Network packages include their listed hardware and are
-            priced separately; cabling and installation are excluded. All prices
-            are indicative.
+            Consultation, installation and integration services; smart-home
+            hardware is excluded. Device quantities describe integration scope,
+            not hardware supply. Network packages include their listed hardware
+            and are priced separately; cabling and installation are excluded.
+            All prices are indicative.
           </TableCaption>
           <TableHeader>
             <TableRow>

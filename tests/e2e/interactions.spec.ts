@@ -1,5 +1,5 @@
 import { test, expect, openProposal, navigate } from "./fixtures";
-import { finishRanges } from "../../src/data";
+
 test("screen and print preserve prices with neutral pricing wording", async ({
   page,
 }) => {
@@ -52,60 +52,6 @@ test("screen and print preserve prices with neutral pricing wording", async ({
   await check();
   await page.emulateMedia({ media: "print" });
   await check();
-});
-for (const range of finishRanges)
-  test(`loads every ${range.name} finish and wraps the carousel`, async ({
-    page,
-  }) => {
-    await openProposal(page);
-    await page.getByRole("tab", { name: range.name, exact: true }).click();
-    for (const [colour, path] of range.colours) {
-      const image = page.locator(".carousel img:visible");
-      await expect(image).toHaveAttribute(
-        "alt",
-        `Clipsal ${range.name} two-gang switch in ${colour}`,
-      );
-      await expect(image).toHaveAttribute(
-        "src",
-        `/react-project-proposal${path}`,
-      );
-      await expect
-        .poll(() =>
-          image.evaluate(
-            (image) =>
-              (image as HTMLImageElement).complete &&
-              (image as HTMLImageElement).naturalWidth > 0,
-          ),
-        )
-        .toBe(true);
-      await page
-        .getByRole("button", { name: `Next ${range.name} colour` })
-        .click();
-    }
-    await expect(page.locator("figcaption:visible")).toContainText("1 /");
-    await page
-      .getByRole("button", { name: `Previous ${range.name} colour` })
-      .click();
-    await expect(page.locator("figcaption:visible")).toContainText(
-      `${range.colours.length} / ${range.colours.length}`,
-    );
-  });
-test("keyboard finish navigation resets the selected colour", async ({
-  page,
-}) => {
-  await openProposal(page);
-  const first = page.getByRole("tab", { name: "Iconic Styl", exact: true });
-  await first.click();
-  await page.getByRole("button", { name: "Next Iconic Styl colour" }).click();
-  await first.focus();
-  await page.keyboard.press("End");
-  await expect(
-    page.getByRole("tab", { name: "Solis", exact: true }),
-  ).toHaveAttribute("aria-selected", "true");
-  await expect(page.locator("figcaption:visible")).toContainText("1 / 2");
-  await page.keyboard.press("Home");
-  await expect(first).toHaveAttribute("aria-selected", "true");
-  await expect(page.locator("figcaption:visible")).toContainText("1 / 3");
 });
 test("brightness keyboard controls do not change either light toggle", async ({
   page,

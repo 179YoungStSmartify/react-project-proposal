@@ -9,6 +9,8 @@ export type Tier = {
 };
 export const integrationScopeNote =
   "Smart-home hardware is excluded and must be purchased or quoted separately. Listed device quantities define integration scope, not hardware supply.";
+export const serviceScopeNote =
+  "Consultation + installation + integration services.";
 export const networkScopeNote =
   "Network packages include the listed hardware. Cabling and installation are excluded and quoted separately.";
 export const hardwareChoiceNote =
@@ -19,7 +21,7 @@ export const lightingTiers: Tier[] = [
     name: "Silver",
     price: "$8,500",
     summary:
-      "Consultation and on/off smart-switch integration, local control and essential routines using client-selected compatible hardware.",
+      "Consultation, installation and on/off smart-switch integration, local control and essential routines using client-selected compatible hardware.",
     specs: [
       ["Lighting", "Integration with basic smart switches"],
       ["Dimming", "Not included"],
@@ -39,7 +41,7 @@ export const lightingTiers: Tier[] = [
     name: "Gold",
     price: "$12,000",
     summary:
-      "Consultation and integration with client-selected compatible smart switches or relays behind normal light switches. Gold lighting control is on/off only; dimming requires Platinum.",
+      "Consultation, installation and integration with client-selected compatible smart switches or relays behind normal light switches. Gold lighting control is on/off only; dimming requires Platinum.",
     recommended: true,
     specs: [
       [
@@ -63,7 +65,7 @@ export const lightingTiers: Tier[] = [
     name: "Platinum",
     price: "$18,000",
     summary:
-      "Consultation and integration with client-selected compatible switches or relays, dimming configuration and expanded support for a tailored experience.",
+      "Consultation, installation and integration with client-selected compatible switches or relays, dimming configuration and expanded support for a tailored experience.",
     specs: [
       ["Lighting", "Smart switches or relays; dimming integration"],
       ["Dimming", "Included, subject to sample-stage testing"],
@@ -213,40 +215,6 @@ export const comparisonRows: [string, string, string, string][] = [
     ...(lightingTiers.map((t) => t.specs[9][1]) as [string, string, string]),
   ],
 ];
-export const finishRanges = [
-  {
-    name: "Iconic Styl",
-    colours: [
-      [
-        "Classic Electric White",
-        "/images/clipsal/processed/styl/S3042C-CE.jpg",
-      ],
-      ["Silver Shadow", "/images/clipsal/processed/styl/S3042C-SH.jpg"],
-      ["Stainless Silver", "/images/clipsal/processed/styl/S3042C-SV.jpg"],
-    ],
-  },
-  {
-    name: "Iconic Essence",
-    colours: [
-      ["Antique Gold", "/images/clipsal/processed/essence/E3042C-AG.jpg"],
-      ["Antique White", "/images/clipsal/processed/essence/E3042C-AW.jpg"],
-    ],
-  },
-  {
-    name: "Saturn Zen",
-    colours: [
-      ["Black", "/images/clipsal/processed/saturn-zen/Z4062PBL-ZB.jpg"],
-      ["White", "/images/clipsal/processed/saturn-zen/Z4062PBL-ZW.jpg"],
-    ],
-  },
-  {
-    name: "Solis",
-    colours: [
-      ["Black", "/images/clipsal/processed/solis/1042PA-ZB.jpg"],
-      ["White", "/images/clipsal/processed/solis/1042PA-ZW.jpg"],
-    ],
-  },
-] as const;
 export function validProjectUrl(raw: string | undefined): string | undefined {
   if (!raw?.trim()) return undefined;
   try {

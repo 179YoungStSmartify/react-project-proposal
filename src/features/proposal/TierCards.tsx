@@ -2,6 +2,7 @@ import {
   lightingTiers,
   networkTiers,
   integrationScopeNote,
+  serviceScopeNote,
   networkScopeNote,
 } from "../../data";
 import { Card } from "../../components/ui/card";
@@ -22,9 +23,7 @@ export function TierCards({ network = false }: { network?: boolean }) {
           </div>
           <div className="tier-content">
             <span className="eyebrow">
-              {network
-                ? "Connectivity hardware package"
-                : "Integration package"}
+              {network ? "Connectivity hardware package" : "Service package"}
             </span>
             <h3>{t.name}</h3>
             <p>{t.summary}</p>
@@ -37,12 +36,14 @@ export function TierCards({ network = false }: { network?: boolean }) {
               ))}
             </dl>
             <p className="small-note">
-              {network ? networkScopeNote : integrationScopeNote}
+              {network
+                ? networkScopeNote
+                : `${serviceScopeNote} ${integrationScopeNote}`}
             </p>
             <div className="price">
               <strong>{t.price}</strong>
               <span>
-                {network ? "indicative hardware" : "indicative integration"}
+                {network ? "indicative hardware" : "indicative services"}
               </span>
             </div>
           </div>

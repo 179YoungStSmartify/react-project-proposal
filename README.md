@@ -21,20 +21,24 @@ The production app is built with Vite at `/react-project-proposal/` for the GitH
 
 ## Commercial scope
 
-Silver, Gold and Platinum prices cover consultation + integration, not hardware supply.
+Silver, Gold and Platinum prices cover consultation + installation + integration, not hardware supply.
 Clients choose compatible hardware within their selected tier. Relays with normal light switches require Gold or Platinum. Dimming requires Platinum and compatible lights, confirmed through sample-stage testing.
 Smart-home hardware is excluded and must be purchased or quoted separately. Listed device quantities define integration scope, not hardware supply.
 This includes separately supplied hubs, switches, screens, sensors and controllers; capability inclusions do not promise equipment supply.
 Network packages include the listed hardware. Cabling and installation are excluded and quoted separately.
-Integration and network package prices remain distinct. Switch-finish images illustrate separately purchased hardware, not included products.
+Service-tier and network-hardware prices remain distinct. Switch/wall-plate examples have been removed; clients choose compatible hardware within their tier's constraints. All electrical work requires appropriately licensed electricians, and compatibility/compliance must be verified before installation.
 
 ## Structure
 
 - `src/` — React and TypeScript proposal app, data and styling.
-- `public/images/` — client-facing switch, finish and product images used in the app.
+- `public/images/` — retained source image assets; the wall-plate examples are no longer rendered in the proposal.
 - `public/viewer/index.html` — bundled local interactive 3D viewer, loaded only on its viewer route.
 - `client/proposal-tiers.html` — retained source proposal, with client-authorised wording corrections applied in this derivative. The original upstream repository is unchanged.
 - `tests/` — React behavior tests and historical-source validation tests.
+
+## Dependency and CSS provenance
+
+The app's generated UI components use the Radix/Tailwind runtime directly; the shadcn CLI is not installed in the application. Its upstream `shadcn@4.21.1` `dist/tailwind.css` is retained as source-owned static CSS at `src/shadcn-tailwind.css` without CSS edits, with its MIT attribution and license in `src/SHADCN-CSS-LICENSE.md`. This avoids pulling the scaffolding CLI's vulnerable transitive dependency tree into installs. The MIT notice also ships with the deployed site at `licenses/shadcn-css.txt`.
 
 ## Public site deployment
 
@@ -60,7 +64,7 @@ npm run test:e2e
 npm run test:e2e:report
 ```
 
-The runner builds and starts its own production preview under the real repository subpath. Tests run in Chromium at desktop and mobile widths with both normal and reduced motion; mobile is emulation, not a real handset. Tests assert actual section position (not just URL changes), repeated anchor clicks, cross-page links, deep-link reloads, history, back-to-top, skip-link focus, mobile focus trapping, finish carousels, brightness keys, responsive overflow and screen/print pricing. Each test uses a fresh browser context and fails on browser console or uncaught errors. No fixed sleeps or automatic retries hide failures.
+The runner builds and starts its own production preview under the real repository subpath. Tests run in Chromium at desktop and mobile widths with both normal and reduced motion; mobile is emulation, not a real handset. Tests assert actual section position (not just URL changes), repeated anchor clicks, cross-page links, deep-link reloads, history, back-to-top, skip-link focus, mobile focus trapping, gallery removal, brightness keys, responsive overflow and screen/print pricing. Each test uses a fresh browser context and fails on browser console or uncaught errors. No fixed sleeps or automatic retries hide failures.
 
 - Interactive runner: `npm run test:e2e:ui`
 - A focused regression: `npm run test:e2e -- --grep "deep links"`
@@ -77,6 +81,6 @@ npx playwright install chromium
 QA_URL=http://127.0.0.1:4174/react-project-proposal/ node tests/browser-smoke.mjs
 ```
 
-Set `QA_OUTPUT` to a local evidence directory if desired. The test checks desktop/mobile layouts, all finish images, keyboard controls, routing, viewer rendering/controls/GLB export, teardown and print. QA output is ignored by Git and not deployed.
+Set `QA_OUTPUT` to a local evidence directory if desired. The test checks desktop/mobile layouts, wall-plate gallery removal, service-scope copy, keyboard controls, routing, viewer rendering/controls/GLB export, teardown and print. QA output is ignored by Git and not deployed.
 
 Live site: https://179youngstsmartify.github.io/react-project-proposal/

@@ -12,10 +12,10 @@ test("integration hardware exclusions and network inclusions remain explicit on 
   for (const media of ["screen", "print"] as const) {
     await page.emulateMedia({ media });
     await expect(
-      page.getByRole("heading", { name: "Smart-home integration packages" }),
+      page.getByRole("heading", { name: "Smart-home service tiers" }),
     ).toBeVisible();
     await expect(page.locator("#packages .section-heading")).toContainText(
-      "Consultation + integration services only.",
+      "Consultation + installation + integration services.",
     );
     await expect(page.locator("#packages .section-heading")).toContainText(
       "Clients choose compatible hardware within their selected tier. Relays with normal light switches require Gold or Platinum. Dimming requires Platinum and compatible lights, confirmed through sample-stage testing.",
@@ -25,7 +25,7 @@ test("integration hardware exclusions and network inclusions remain explicit on 
       await expect(card).toContainText(excluded);
       await expect(card).toContainText(quantity);
       await expect(
-        card.getByText("indicative integration", { exact: true }),
+        card.getByText("indicative services", { exact: true }),
       ).toBeVisible();
       await expect(card).toContainText("Integration included");
       await expect(
@@ -63,11 +63,13 @@ test("integration hardware exclusions and network inclusions remain explicit on 
     ).toHaveCount(3);
     await expect(page.locator("footer")).toContainText(excluded);
     await expect(page.locator("footer")).toContainText(network);
-    await expect(page.locator("#finishes")).toContainText(
-      "These switches are not included in the integration price.",
-    );
-    await expect(page.locator("#finishes")).toContainText(
-      "These Clipsal ranges are examples, not mandatory hardware choices.",
+    await expect(page.locator("#finishes")).toHaveCount(0);
+    await expect(page.getByRole("tablist")).toHaveCount(0);
+    await expect(
+      page.getByRole("heading", { name: "Switch finishes" }),
+    ).toHaveCount(0);
+    await expect(page.locator("footer")).toContainText(
+      "Consultation + installation + integration services.",
     );
   }
   await page.emulateMedia({ media: "screen" });
