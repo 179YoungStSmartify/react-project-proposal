@@ -8,7 +8,7 @@ export type Tier = {
   recommended?: boolean;
 };
 export const integrationScopeNote =
-  "Smart-home hardware is excluded and must be purchased or quoted separately. Listed device quantities define integration scope, not hardware supply.";
+  "Listed wall-screen hardware and one smart-home hub (HA Green or mini PC) are included. Switches, relays and wall plates are excluded and purchased separately.";
 export const serviceScopeNote =
   "Consultation + installation + integration services.";
 export const networkScopeNote =
@@ -34,6 +34,7 @@ export const lightingTiers: Tier[] = [
       ["Remote access", "Nabu Casa (subscription)"],
       ["Support after handover", "2 months"],
       ["Relays with normal switches", "Not included"],
+      ["Smart-home hub hardware", "One hub included (HA Green or mini PC)"],
     ],
   },
   {
@@ -58,6 +59,7 @@ export const lightingTiers: Tier[] = [
       ["Remote access", "Nabu Casa (subscription)"],
       ["Support after handover", "2 months"],
       ["Relays with normal switches", "Integration included"],
+      ["Smart-home hub hardware", "One hub included (HA Green or mini PC)"],
     ],
   },
   {
@@ -84,6 +86,7 @@ export const lightingTiers: Tier[] = [
         "2 months, priority support, callout fee exempt",
       ],
       ["Relays with normal switches", "Integration included"],
+      ["Smart-home hub hardware", "One hub included (HA Green or mini PC)"],
     ],
   },
 ];
@@ -148,10 +151,16 @@ export const networkTiers: Tier[] = [
 ];
 export const comparisonRows: [string, string, string, string][] = [
   [
-    "Smart-home hardware supply",
-    "Excluded — supplied separately",
-    "Excluded — supplied separately",
-    "Excluded — supplied separately",
+    "Smart-home hub hardware",
+    "Included — one hub (HA Green or mini PC)",
+    "Included — one hub (HA Green or mini PC)",
+    "Included — one hub (HA Green or mini PC)",
+  ],
+  [
+    "Switches, relays and wall plates",
+    "Excluded — client supplied",
+    "Excluded — client supplied",
+    "Excluded — client supplied",
   ],
   [
     "Lighting",

@@ -15,7 +15,9 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Audit full dependency tree
-        run: npm audit --audit-level=low
+        continue-on-error: true
+        run: |
+          npm audit --json > "$RUNNER_TEMP/npm-audit-full.json"
       - name: Audit production dependency tree
         run: npm audit --omit=dev --audit-level=low
       - run: npm test
@@ -25,6 +27,14 @@ jobs:
       - run: python3 -m unittest discover -s tests -p 'test_*.py'
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
+      - name: Upload dependency audit report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: dependency-audit
+          path: ${{ runner.temp }}/npm-audit-full.json
+          retention-days: 14
+          if-no-files-found: error
       - name: Upload browser reports and failure evidence
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7

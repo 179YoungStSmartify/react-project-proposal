@@ -1,12 +1,17 @@
 import { test, expect, openProposal, navigate } from "./fixtures";
-test("integration hardware exclusions and network inclusions remain explicit on screen and in print", async ({
+test("included core hardware and excluded lighting hardware remain explicit on screen and in print", async ({
   page,
 }) => {
   await openProposal(page);
+  const included =
+    "Listed wall-screen hardware and one smart-home hub (HA Green or mini PC) are included.";
   const excluded =
-    "Smart-home hardware is excluded and must be purchased or quoted separately.";
-  const quantity =
-    "Listed device quantities define integration scope, not hardware supply.";
+    "Switches, relays and wall plates are excluded and purchased separately.";
+  const quantities = [
+    "2×S, 1×M, 1×L",
+    "2×S, 2×L",
+    "2×S, 1×L High Performance (Android), 1×XL High Performance (Android)",
+  ];
   const network =
     "Network packages include the listed hardware. Cabling and installation are excluded and quoted separately.";
   for (const media of ["screen", "print"] as const) {
@@ -23,9 +28,17 @@ test("integration hardware exclusions and network inclusions remain explicit on 
     for (let index = 0; index < 3; index++) {
       const card = page.locator(".tier").nth(index);
       await expect(card).toContainText(excluded);
-      await expect(card).toContainText(quantity);
+      await expect(card).toContainText(included);
       await expect(
-        card.getByText("indicative services", { exact: true }),
+        card.getByText("Wall screens", { exact: true }).locator(".."),
+      ).toContainText(quantities[index]);
+      await expect(
+        card
+          .getByText("Smart-home hub hardware", { exact: true })
+          .locator(".."),
+      ).toContainText("One hub included (HA Green or mini PC)");
+      await expect(
+        card.getByText("indicative package", { exact: true }),
       ).toBeVisible();
       await expect(card).toContainText("Integration included");
       await expect(
@@ -51,17 +64,36 @@ test("integration hardware exclusions and network inclusions remain explicit on 
     }
     const row = page.getByRole("row").filter({
       has: page.getByRole("rowheader", {
-        name: "Smart-home hardware supply",
+        name: "Switches, relays and wall plates",
         exact: true,
       }),
     });
     await expect(
       row.getByRole("cell", {
-        name: "Excluded — supplied separately",
+        name: "Excluded — client supplied",
         exact: true,
       }),
     ).toHaveCount(3);
+    await expect(page.locator("#packages .section-heading")).toContainText(
+      included,
+    );
+    await expect(page.locator("footer")).toContainText(included);
     await expect(page.locator("footer")).toContainText(excluded);
+    const hubRow = page
+      .getByRole("row")
+      .filter({
+        has: page.getByRole("rowheader", {
+          name: "Smart-home hub hardware",
+          exact: true,
+        }),
+      });
+    await expect(
+      hubRow.getByRole("cell", {
+        name: "Included — one hub (HA Green or mini PC)",
+        exact: true,
+      }),
+    ).toHaveCount(3);
+    await expect(page.locator("table caption")).toContainText("wall-screen");
     await expect(page.locator("footer")).toContainText(network);
     await expect(page.locator("#finishes")).toHaveCount(0);
     await expect(page.getByRole("tablist")).toHaveCount(0);

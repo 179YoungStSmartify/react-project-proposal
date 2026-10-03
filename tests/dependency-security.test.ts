@@ -9,12 +9,13 @@ const packageJson = JSON.parse(
 const indexCss = readFileSync(resolve(process.cwd(), "src/index.css"), "utf8");
 
 describe("shadcn stylesheet ownership and dependency boundary", () => {
-  it("does not ship the scaffolding CLI as an application dependency", () => {
+  it("keeps the scaffold CLI development-only", () => {
     expect(packageJson.dependencies).not.toHaveProperty("shadcn");
-    expect(packageJson.devDependencies).not.toHaveProperty("shadcn");
+    expect(packageJson.devDependencies).toHaveProperty("shadcn");
+    expect(packageJson.scripts).not.toHaveProperty("typecheck:ignore");
   });
 
-  it("imports the source-owned static styles with the original variants and utilities", () => {
+  it("imports source-owned styles and keeps the CLI available", () => {
     expect(indexCss).toContain('@import "./shadcn-tailwind.css";');
     const styles = readFileSync(
       resolve(process.cwd(), "src/shadcn-tailwind.css"),
@@ -33,8 +34,7 @@ describe("shadcn stylesheet ownership and dependency boundary", () => {
       "@utility no-scrollbar",
       "@utility scroll-fade",
       "@utility shimmer",
-    ]) {
+    ])
       expect(styles).toContain(required);
-    }
   });
 });

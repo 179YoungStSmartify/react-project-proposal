@@ -21,10 +21,9 @@ The production app is built with Vite at `/react-project-proposal/` for the GitH
 
 ## Commercial scope
 
-Silver, Gold and Platinum prices cover consultation + installation + integration, not hardware supply.
+Silver, Gold and Platinum prices are indicative package prices covering consultation + installation + integration plus the listed wall-screen hardware and one smart-home hub (HA Green or mini PC).
 Clients choose compatible hardware within their selected tier. Relays with normal light switches require Gold or Platinum. Dimming requires Platinum and compatible lights, confirmed through sample-stage testing.
-Smart-home hardware is excluded and must be purchased or quoted separately. Listed device quantities define integration scope, not hardware supply.
-This includes separately supplied hubs, switches, screens, sensors and controllers; capability inclusions do not promise equipment supply.
+Listed wall-screen hardware and one smart-home hub (HA Green or mini PC) are included. Switches, relays and wall plates are excluded and purchased separately. The exact wall-screen quantities listed in each tier are included hardware; the hub choice is confirmed for the project.
 Network packages include the listed hardware. Cabling and installation are excluded and quoted separately.
 Service-tier and network-hardware prices remain distinct. Switch/wall-plate examples have been removed; clients choose compatible hardware within their tier's constraints. All electrical work requires appropriately licensed electricians, and compatibility/compliance must be verified before installation.
 
@@ -38,7 +37,7 @@ Service-tier and network-hardware prices remain distinct. Switch/wall-plate exam
 
 ## Dependency and CSS provenance
 
-The app's generated UI components use the Radix/Tailwind runtime directly; the shadcn CLI is not installed in the application. Its upstream `shadcn@4.21.1` `dist/tailwind.css` is retained as source-owned static CSS at `src/shadcn-tailwind.css` without CSS edits, with its MIT attribution and license in `src/SHADCN-CSS-LICENSE.md`. This avoids pulling the scaffolding CLI's vulnerable transitive dependency tree into installs. The MIT notice also ships with the deployed site at `licenses/shadcn-css.txt`.
+The app's generated UI components use the Radix/Tailwind runtime directly; `shadcn` is a development-only CLI and is not imported by the deployed app. Its upstream `shadcn@4.21.1` `dist/tailwind.css` is retained as source-owned static CSS at `src/shadcn-tailwind.css` without CSS edits, with its MIT attribution and license in `src/SHADCN-CSS-LICENSE.md`. The CLI dependency chain has known development-tool advisories (including denial-of-service exposure); these do not represent runtime exposure in the static deployed page. Inspect full findings with `npm audit --json` and deployment dependencies with `npm audit --omit=dev --audit-level=low`; production audit is the blocking gate. The MIT notice also ships with the deployed site at `licenses/shadcn-css.txt`.
 
 ## Public site deployment
 
