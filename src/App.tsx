@@ -6,16 +6,28 @@ import { ViewerPage } from "./pages/ViewerPage";
 import { NetworkPage } from "./pages/NetworkPage";
 import { useRoute } from "./lib/routing";
 export default function App() {
-  const { path, section, hash } = useRoute();
+  const { path, section, hash, navigationId } = useRoute();
   useEffect(() => {
     document.title = `${path === "/viewer" ? "3D Home Viewer" : path === "/network" ? "Network Design" : path === "/" ? "Smart Home Proposal" : "Page not found"} | 179 Young Street`;
-    const frame = requestAnimationFrame(() => {
-      if (path === "/" && section)
-        document.getElementById(section)?.scrollIntoView();
-      else window.scrollTo({ top: 0, behavior: "instant" });
-    });
-    return () => cancelAnimationFrame(frame);
-  }, [path, section, hash]);
+    let cancelled = false;
+    let frame: number | undefined;
+    const scroll = () => {
+      if (cancelled) return;
+      frame = requestAnimationFrame(() => {
+        if (path === "/" && section)
+          document.getElementById(section)?.scrollIntoView();
+        else window.scrollTo({ top: 0, behavior: "instant" });
+      });
+    };
+    // Font loading changes section positions, especially on a cold mobile load.
+    if (path === "/" && section)
+      void (document.fonts?.ready ?? Promise.resolve()).then(scroll);
+    else scroll();
+    return () => {
+      cancelled = true;
+      if (frame !== undefined) cancelAnimationFrame(frame);
+    };
+  }, [path, section, hash, navigationId]);
   return (
     <>
       <a

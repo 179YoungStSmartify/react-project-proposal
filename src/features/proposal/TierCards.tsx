@@ -31,11 +31,7 @@ export function TierCards({ network = false }: { network?: boolean }) {
             </dl>
             <div className="price">
               <strong>{t.price}</strong>
-              <span>
-                {network
-                  ? "indicative hardware, inc GST"
-                  : "indicative, inc GST"}
-              </span>
+              <span>{network ? "indicative hardware" : "indicative"}</span>
             </div>
           </div>
         </Card>

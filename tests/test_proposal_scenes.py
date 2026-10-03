@@ -243,7 +243,7 @@ class ProposalTierVisualsTest(unittest.TestCase):
             self.assertRegex(self.html, r'<div[^>]+id="%s"' % anchor_id)
             link = re.search(r'<a[^>]+href="#%s"[^>]*>(.*?)</a>' % anchor_id, cell.group(1), re.DOTALL)
             self.assertIsNotNone(link, tier)
-            self.assertIn(tier + " Network — " + price + " indicative hardware, inc GST", link.group(1), tier)
+            self.assertIn(tier + " Network — " + price + " indicative hardware", link.group(1), tier)
             self.assertNotIn("Matching network tier available — quoted separately", cell.group(1), tier)
 
     def test_network_app_and_subscription_copy_are_scoped_correctly(self):

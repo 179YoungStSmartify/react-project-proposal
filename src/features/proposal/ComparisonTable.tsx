@@ -23,7 +23,7 @@ export function ComparisonTable() {
         <Table>
           <TableCaption>
             Lighting packages; network hardware is quoted separately. All prices
-            are indicative, inclusive of GST.
+            are indicative.
           </TableCaption>
           <TableHeader>
             <TableRow>

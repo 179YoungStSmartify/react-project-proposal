@@ -164,7 +164,7 @@ export const comparisonRows: [string, string, string, string][] = [
   [
     "Home network",
     ...(networkTiers.map(
-      (t) => `${t.name} — ${t.price} indicative hardware, inc GST`,
+      (t) => `${t.name} — ${t.price} indicative hardware`,
     ) as [string, string, string]),
   ],
   [

@@ -37,7 +37,7 @@ export function ProposalPage() {
           </div>
           <div className="hero-meta">
             <span>Prepared as a proposal draft</span>
-            <span>Indicative pricing · GST included</span>
+            <span>Indicative pricing</span>
           </div>
         </div>
         <div className="hero-art" aria-hidden="true">
@@ -57,9 +57,8 @@ export function ProposalPage() {
           <span className="eyebrow">Three ways to begin</span>
           <h2>Lighting packages</h2>
           <p>
-            Indicative proposal pricing, including GST. Final quantities and
-            prices are confirmed in writing after the home visit, before
-            ordering.
+            Indicative proposal pricing. Final quantities and prices are
+            confirmed in writing after the home visit, before ordering.
           </p>
         </div>
         <TierCards />
@@ -199,13 +198,12 @@ export function ProposalPage() {
       <footer>
         <strong>Proposal draft · indicative pricing</strong>
         <p>
-          Prices include GST and are confirmed in writing after the home visit,
-          before anything is ordered. Dimming is tested in your home during the
-          sample stage. Network is quoted separately alongside your lighting
-          tier. Garage automatic close must not be enabled until a safety
-          beam/photo-eye has been verified and function-tested on site. Safety
-          interlocks remain in the opener; suitability is not represented as
-          already verified.
+          Prices are confirmed in writing after the home visit, before anything
+          is ordered. Dimming is tested in your home during the sample stage.
+          Network is quoted separately alongside your lighting tier. Garage
+          automatic close must not be enabled until a safety beam/photo-eye has
+          been verified and function-tested on site. Safety interlocks remain in
+          the opener; suitability is not represented as already verified.
         </p>
         <p>
           Prepared by Sam Lee &amp; Angus Wong · Proposal date: 25 September

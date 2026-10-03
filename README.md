@@ -24,12 +24,12 @@ The production app is built with Vite at `/react-project-proposal/` for the GitH
 - `src/` — React and TypeScript proposal app, data and styling.
 - `public/images/` — client-facing switch, finish and product images used in the app.
 - `public/viewer/index.html` — bundled local interactive 3D viewer, loaded only on its viewer route.
-- `client/proposal-tiers.html` — preserved historical source proposal; it is not rewritten by this app.
+- `client/proposal-tiers.html` — retained source proposal, with client-authorised wording corrections applied in this derivative. The original upstream repository is unchanged.
 - `tests/` — React behavior tests and historical-source validation tests.
 
 ## Public site deployment
 
-`.github/workflows/pages.yml` builds only the Vite application output (`dist/`) and publishes that artifact to GitHub Pages. `.github/workflows/quality.yml` runs install, tests, lint, typecheck and build checks. Configure the repository's Pages source to GitHub Actions in repository settings; the workflow does not publish source files or the repository tree as a Pages artifact. A public repository and public Pages site are intentional, authorised publication choices; there is no user authentication or access-control layer on the site.
+`.github/workflows/pages.yml` builds only the Vite application output (`dist/`) and publishes that artifact to GitHub Pages. `.github/workflows/quality.yml` runs install, React and historical-source tests, lint, typecheck, build and the production Playwright suite. Browser reports and failure screenshots, videos and traces are retained as Actions artifacts for 14 days. Configure the repository's Pages source to GitHub Actions in repository settings; the workflow does not publish source files or the repository tree as a Pages artifact. A public repository and public Pages site are intentional, authorised publication choices; there is no user authentication or access-control layer on the site.
 
 ## UniFi design URL
 
@@ -42,6 +42,22 @@ The proposal originates from [`179YoungStSmartify/project-proposal`](https://git
 ## Design and architecture
 
 See `DESIGN.md` for the customised shadcn/ui + Radix + Tailwind design system and `ARCHITECTURE.md` for layer boundaries. Proposal, network and viewer pages share the application header; prices and quantities live in typed data. Section links use `#/?section=packages` rather than multiple hashes.
+
+## Playwright regression tests
+
+```sh
+npx playwright install chromium
+npm run test:e2e
+npm run test:e2e:report
+```
+
+The runner builds and starts its own production preview under the real repository subpath. Tests run in Chromium at desktop and mobile widths with both normal and reduced motion; mobile is emulation, not a real handset. Tests assert actual section position (not just URL changes), repeated anchor clicks, cross-page links, deep-link reloads, history, back-to-top, skip-link focus, mobile focus trapping, finish carousels, brightness keys, responsive overflow and screen/print pricing. Each test uses a fresh browser context and fails on browser console or uncaught errors. No fixed sleeps or automatic retries hide failures.
+
+- Interactive runner: `npm run test:e2e:ui`
+- A focused regression: `npm run test:e2e -- --grep "deep links"`
+- Existing deployed site: `QA_URL=https://179youngstsmartify.github.io/react-project-proposal/ npm run test:e2e` (skips the local build/server)
+
+Reports, JUnit results and failure evidence stay in ignored `playwright-report/` and `test-results/` directories; they are not part of the Pages artifact. The separate smoke test below retains the heavier WebGL viewer/GLB and print-action coverage.
 
 ## Browser smoke test
 
