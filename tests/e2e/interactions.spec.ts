@@ -30,7 +30,7 @@ test("screen and print preserve prices with neutral pricing wording", async ({
       ],
       [
         "platinum",
-        "Cloud Gateway Max 2TB (UCG-Max-2TB) · 4× U7 Pro APs · 1× USW-Ultra + 1× Flex 2.5G PoE switch · 3× G6 cameras",
+        "Cloud Gateway Max 2TB (UCG-Max-2TB) · 4× U7 Pro APs · 1× Ultra (USW-Ultra) + 1× Flex 2.5G PoE (USW-Flex-2.5G-8-PoE) · 3× G6 cameras",
         "$4,805",
       ],
     ];

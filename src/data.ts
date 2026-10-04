@@ -149,7 +149,7 @@ export const networkTiers: Tier[] = [
     specs: [
       [
         "Kit",
-        "Cloud Gateway Max 2TB (UCG-Max-2TB) · 4× U7 Pro APs · 1× USW-Ultra + 1× Flex 2.5G PoE switch · 3× G6 cameras",
+        "Cloud Gateway Max 2TB (UCG-Max-2TB) · 4× U7 Pro APs · 1× Ultra (USW-Ultra) + 1× Flex 2.5G PoE (USW-Flex-2.5G-8-PoE) · 3× G6 cameras",
       ],
       ["APs", "4 — two per floor"],
       ["Gateway LAN", "2.5 GbE"],

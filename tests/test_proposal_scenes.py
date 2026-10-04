@@ -167,7 +167,7 @@ class ProposalTierVisualsTest(unittest.TestCase):
         network_section = re.search(r'<!-- ================= NETWORK PROPOSAL ================= -->(.*?)<!-- ================= COMPARE ================= -->', self.html, re.DOTALL)
         self.assertIsNotNone(network_section)
         expected = {
-            "silver": ("UDR7", "2.5 GbE", "2.3 Gbps"),
+            "silver": ("UDR", "1 GbE LAN", "1 Gbps"),
             "gold": ("Cloud Gateway Ultra", "1 GbE", "1 Gbps"),
             "platinum": ("Cloud Gateway Max", "2.5 GbE", "2.3 Gbps"),
         }
@@ -185,24 +185,26 @@ class ProposalTierVisualsTest(unittest.TestCase):
             row_order = re.findall(r'<span class="k">(Wi‑Fi|IDS/IPS throughput)</span>', card)
             self.assertEqual(["Wi‑Fi", "IDS/IPS throughput"], row_order, tier)
 
-    def test_wifi_7_access_points_have_poe_plus_switches(self):
+    def test_network_switches_match_design_center_bill_of_materials(self):
         network_section = re.search(r'<!-- ================= NETWORK PROPOSAL ================= -->(.*?)<!-- ================= COMPARE ================= -->', self.html, re.DOTALL)
         self.assertIsNotNone(network_section)
-        expected_switch = {
-            "silver": "PoE+ switch",
-            "gold": "2.5 GbE PoE+ switch",
-            "platinum": "2.5 GbE PoE+ switch",
+        expected_switches = {
+            "silver": ("USW-Ultra-60W",),
+            "gold": ("USW-Flex-2.5G-8-PoE",),
+            "platinum": ("USW-Ultra", "USW-Flex-2.5G-8-PoE"),
         }
-        for tier, switch_spec in expected_switch.items():
+        for tier, switch_ids in expected_switches.items():
             card = tier_block(network_section.group(1), tier)
-            self.assertIn(switch_spec, card, tier)
+            for switch_id in switch_ids:
+                self.assertIn(switch_id, card, tier)
 
     def test_platinum_storage_claim_respects_gateway_max_limit(self):
         network_section = re.search(r'<!-- ================= NETWORK PROPOSAL ================= -->(.*?)<!-- ================= COMPARE ================= -->', self.html, re.DOTALL)
         self.assertIsNotNone(network_section)
         platinum = tier_block(network_section.group(1), "platinum")
-        self.assertIn("up to 2 TB local recording", platinum)
-        self.assertNotIn("2 TB recording</span>", platinum)
+        self.assertIn("UCG-Max-2TB", platinum)
+        self.assertIn("2 TB model", platinum)
+        self.assertNotIn("up to 2 TB local recording", platinum)
 
     def test_back_to_top_button_is_hidden_until_scrolled_down(self):
         button = re.search(r'<button[^>]*id="backToTop"[^>]*>', self.html)

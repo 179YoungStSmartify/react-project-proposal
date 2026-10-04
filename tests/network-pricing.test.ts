@@ -17,7 +17,7 @@ it("uses the approved network prices and precise hardware descriptions", () => {
     "Cloud Gateway Ultra (UCG-Ultra) · 4× U7 Pro APs · Flex 2.5G PoE (USW-Flex-2.5G-8-PoE) switch",
   );
   expect(specs[2].Kit).toBe(
-    "Cloud Gateway Max 2TB (UCG-Max-2TB) · 4× U7 Pro APs · 1× USW-Ultra + 1× Flex 2.5G PoE switch · 3× G6 cameras",
+    "Cloud Gateway Max 2TB (UCG-Max-2TB) · 4× U7 Pro APs · 1× Ultra (USW-Ultra) + 1× Flex 2.5G PoE (USW-Flex-2.5G-8-PoE) · 3× G6 cameras",
   );
   expect(specs[2].Cameras).toBe(
     "1× G6 Pro Dome, 1× G6 180 and 1× G6 Mini Dome; 2 TB model",
