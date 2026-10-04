@@ -36,6 +36,16 @@ export function TierCards({ network = false }: { network?: boolean }) {
               ))}
             </dl>
             {network && <p className="small-note">{networkScopeNote}</p>}
+            {network && t.designUrl && (
+              <a
+                className="network-design-link"
+                href={t.designUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View {t.name.replace(" Network", "")} network design ↗
+              </a>
+            )}
             <div className="price">
               <strong>{t.price}</strong>
               <span>

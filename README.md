@@ -43,9 +43,9 @@ The app's generated UI components use the Radix/Tailwind runtime directly; `shad
 
 `.github/workflows/pages.yml` builds only the Vite application output (`dist/`) and publishes that artifact to GitHub Pages. `.github/workflows/quality.yml` runs install, React and historical-source tests, lint, typecheck, build and the production Playwright suite. Browser reports and failure screenshots, videos and traces are retained as Actions artifacts for 14 days. Configure the repository's Pages source to GitHub Actions in repository settings; the workflow does not publish source files or the repository tree as a Pages artifact. A public repository and public Pages site are intentional, authorised publication choices; there is no user authentication or access-control layer on the site.
 
-## UniFi design URL
+## UniFi Design Center shares
 
-No project-specific UniFi design URL is configured. The network route honestly reports this state and links to `https://design.ui.com`. To configure a project design link at build time, set `VITE_UNIFI_PROJECT_URL` to a valid `http:` or `https:` URL in the build environment. Invalid or unsupported protocols are ignored. Do not supply a UniFi login URL or credentials.
+Each network tier links to its matching owner-supplied UniFi Design Center share from the tier card. The links open in a new tab. The Design Center response policy restricts framing to Ubiquiti origins, so GitHub Pages cannot embed the interactive projects; do not replace the external links with iframes or add login credentials. The linked projects provide the interactive layouts and bills of materials; typed package data records the concise client-facing tier summaries.
 
 ## Provenance
 

@@ -310,6 +310,12 @@ h2 {
   min-height: 76px;
   font-size: 14px;
 }
+.network-design-link {
+  margin: 0 0 18px;
+  font-size: 14px;
+  font-weight: 650;
+  text-underline-offset: 3px;
+}
 .tier dl {
   margin: 0;
   flex: 1;

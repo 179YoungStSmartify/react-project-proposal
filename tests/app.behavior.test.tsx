@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import App from "../src/App";
-import { validProjectUrl } from "../src/data";
 
 describe("proposal experience", () => {
   it("presents the source tiers and matching comparison values", () => {
@@ -73,21 +72,32 @@ describe("proposal experience", () => {
       expect(screen.queryByTitle(/interactive 3d home viewer/i)).toBeNull(),
     );
   });
-  it("shows safe network design states and rejects invalid project URLs", async () => {
+  it("shows the corresponding external design on each network tier", async () => {
     window.location.hash = "#/";
     render(<App />);
     fireEvent.click(screen.getByRole("link", { name: "Network design" }));
+    const links = [
+      [
+        "View Silver network design ↗",
+        "https://design.ui.com/share/3decd510-ef03-4098-ac90-fc137c050a52#key=c23f7582-5f37-476f-bfa3-580eaf920915",
+      ],
+      [
+        "View Gold network design ↗",
+        "https://design.ui.com/share/1f719bb6-db14-46b1-b2be-eba8edb180cd#key=cf9d690b-f603-4f83-93d5-f0680878fbc3",
+      ],
+      [
+        "View Platinum network design ↗",
+        "https://design.ui.com/share/36118d48-fd86-46eb-9be2-9f6b8e65cd4f#key=737f0add-e88e-4cd1-8b9e-a92fa1e370cf",
+      ],
+    ];
+    for (const [name, href] of links) {
+      const link = await screen.findByRole("link", { name });
+      expect(link.getAttribute("href")).toBe(href);
+      expect(link.getAttribute("target")).toBe("_blank");
+      expect(link.getAttribute("rel")).toContain("noopener");
+    }
     expect(
-      await screen.findByText(/project design link not configured/i),
-    ).toBeTruthy();
-    expect(
-      screen
-        .getByRole("link", { name: /UniFi Design Center/i })
-        .getAttribute("href"),
-    ).toBe("https://design.ui.com");
-    expect(validProjectUrl("javascript:alert(1)")).toBeUndefined();
-    expect(validProjectUrl("https://example.test/design")).toBe(
-      "https://example.test/design",
-    );
+      screen.queryByText(/project design link not configured/i),
+    ).toBeNull();
   });
 });

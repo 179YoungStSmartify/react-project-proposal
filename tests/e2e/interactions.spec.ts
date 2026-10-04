@@ -18,15 +18,19 @@ test("screen and print preserve prices with neutral pricing wording", async ({
     ])
       await expect(page.getByText(price, { exact: true })).toBeVisible();
     const network = [
-      ["silver", "UDR7 · 2× U7 Pro APs · PoE+ switch", "$1,825"],
+      [
+        "silver",
+        "Dream Router (UDR) · 2× U7 Pro APs · Ultra 60W (USW-Ultra-60W) switch",
+        "$1,825",
+      ],
       [
         "gold",
-        "Cloud Gateway Ultra · 4× U7 Pro APs · 2.5 GbE PoE+ switch",
+        "Cloud Gateway Ultra (UCG-Ultra) · 4× U7 Pro APs · Flex 2.5G PoE (USW-Flex-2.5G-8-PoE) switch",
         "$2,630",
       ],
       [
         "platinum",
-        "Cloud Gateway Max · 4× U7 Pro APs · 3× G6 cameras · 2.5 GbE PoE+ switch",
+        "Cloud Gateway Max 2TB (UCG-Max-2TB) · 4× U7 Pro APs · 1× USW-Ultra + 1× Flex 2.5G PoE switch · 3× G6 cameras",
         "$4,805",
       ],
     ];
@@ -37,7 +41,7 @@ test("screen and print preserve prices with neutral pricing wording", async ({
       ).toContainText(`${price} indicative hardware`);
     }
     await expect(page.locator("#network-platinum")).toContainText(
-      "3× G6 + up to 2 TB local recording",
+      "1× G6 Pro Dome, 1× G6 180 and 1× G6 Mini Dome; 2 TB model",
     );
     await expect(
       page.getByText(
@@ -126,10 +130,14 @@ test("unknown routes recover and network integration stays honest", async ({
   ).toBeVisible();
   await page.getByRole("link", { name: "Return to proposal" }).click();
   await navigate(page, "Network design");
-  await expect(
-    page.getByText(/Project design link not configured/),
-  ).toBeVisible();
-  await expect(
-    page.getByRole("link", { name: "Visit UniFi Design Center ↗" }),
-  ).toHaveAttribute("href", "https://design.ui.com");
+  for (const [name, shareId] of [
+    ["View Silver network design ↗", "3decd510-ef03-4098-ac90-fc137c050a52"],
+    ["View Gold network design ↗", "1f719bb6-db14-46b1-b2be-eba8edb180cd"],
+    ["View Platinum network design ↗", "36118d48-fd86-46eb-9be2-9f6b8e65cd4f"],
+  ]) {
+    const link = page.getByRole("link", { name });
+    await expect(link).toHaveAttribute("href", new RegExp(shareId));
+    await expect(link).toHaveAttribute("target", "_blank");
+  }
+  await expect(page.locator(".network-page iframe")).toHaveCount(0);
 });

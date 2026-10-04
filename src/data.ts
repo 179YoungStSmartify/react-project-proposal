@@ -6,6 +6,7 @@ export type Tier = {
   summary: string;
   specs: [string, string][];
   recommended?: boolean;
+  designUrl?: string;
 };
 export const integrationScopeNote =
   "Listed wall-screen hardware and one smart-home hub are included: HA Green for Silver and Gold; mini PC for Platinum. Switches, relays and wall plates are excluded and purchased separately.";
@@ -94,15 +95,20 @@ export const networkTiers: Tier[] = [
   {
     key: "silver",
     name: "Silver Network",
+    designUrl:
+      "https://design.ui.com/share/3decd510-ef03-4098-ac90-fc137c050a52#key=c23f7582-5f37-476f-bfa3-580eaf920915",
     price: "$1,825",
     summary:
       "Designed for reliable whole-home coverage, with one access point per floor.",
     specs: [
-      ["Kit", "UDR7 · 2× U7 Pro APs · PoE+ switch"],
+      [
+        "Kit",
+        "Dream Router (UDR) · 2× U7 Pro APs · Ultra 60W (USW-Ultra-60W) switch",
+      ],
       ["APs", "2 — one per floor"],
-      ["Gateway LAN", "2.5 GbE"],
+      ["Gateway LAN", "1 GbE LAN"],
       ["Wi‑Fi", "Wi‑Fi 7 (802.11be) · 6‑stream tri‑band"],
-      ["IDS/IPS throughput", "2.3 Gbps"],
+      ["IDS/IPS throughput", "1 Gbps"],
       ["Security", "Built‑in IDS/IPS"],
       ["Cameras", "Not included"],
       ["IoT network", "Dedicated VLAN for smart devices"],
@@ -112,12 +118,17 @@ export const networkTiers: Tier[] = [
   {
     key: "gold",
     name: "Gold Network",
+    designUrl:
+      "https://design.ui.com/share/1f719bb6-db14-46b1-b2be-eba8edb180cd#key=cf9d690b-f603-4f83-93d5-f0680878fbc3",
     price: "$2,630",
     summary:
       "Dense Wi‑Fi 7, with more access points for denser coverage throughout the home.",
     recommended: true,
     specs: [
-      ["Kit", "Cloud Gateway Ultra · 4× U7 Pro APs · 2.5 GbE PoE+ switch"],
+      [
+        "Kit",
+        "Cloud Gateway Ultra (UCG-Ultra) · 4× U7 Pro APs · Flex 2.5G PoE (USW-Flex-2.5G-8-PoE) switch",
+      ],
       ["APs", "4 — two per floor"],
       ["Gateway LAN", "1 GbE"],
       ["Wi‑Fi", "Wi‑Fi 7 (802.11be) · 6‑stream tri‑band"],
@@ -131,19 +142,21 @@ export const networkTiers: Tier[] = [
   {
     key: "platinum",
     name: "Platinum Network",
+    designUrl:
+      "https://design.ui.com/share/36118d48-fd86-46eb-9be2-9f6b8e65cd4f#key=737f0add-e88e-4cd1-8b9e-a92fa1e370cf",
     price: "$4,805",
     summary: "Local recording, with no ongoing UniFi subscription fee.",
     specs: [
       [
         "Kit",
-        "Cloud Gateway Max · 4× U7 Pro APs · 3× G6 cameras · 2.5 GbE PoE+ switch",
+        "Cloud Gateway Max 2TB (UCG-Max-2TB) · 4× U7 Pro APs · 1× USW-Ultra + 1× Flex 2.5G PoE switch · 3× G6 cameras",
       ],
       ["APs", "4 — two per floor"],
       ["Gateway LAN", "2.5 GbE"],
       ["Wi‑Fi", "Wi‑Fi 7 (802.11be) · 6‑stream tri‑band"],
       ["IDS/IPS throughput", "2.3 Gbps"],
       ["Security", "Built‑in IDS/IPS"],
-      ["Cameras", "3× G6 + up to 2 TB local recording"],
+      ["Cameras", "1× G6 Pro Dome, 1× G6 180 and 1× G6 Mini Dome; 2 TB model"],
       ["IoT network", "Dedicated VLAN for smart devices"],
       ["Network management", "UniFi app"],
     ],
@@ -224,14 +237,3 @@ export const comparisonRows: [string, string, string, string][] = [
     ...(lightingTiers.map((t) => t.specs[9][1]) as [string, string, string]),
   ],
 ];
-export function validProjectUrl(raw: string | undefined): string | undefined {
-  if (!raw?.trim()) return undefined;
-  try {
-    const url = new URL(raw);
-    return url.protocol === "https:" || url.protocol === "http:"
-      ? url.href
-      : undefined;
-  } catch {
-    return undefined;
-  }
-}
