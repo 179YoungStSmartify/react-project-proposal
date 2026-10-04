@@ -218,8 +218,7 @@ export function ProposalPage() {
           the opener; suitability is not represented as already verified.
         </p>
         <p>
-          Prepared by Sam Lee &amp; Angus Wong · Proposal date: 25 September
-          2026.
+          Prepared by Sam Lee &amp; Angus Wong · Proposal date: 05 October 2026.
         </p>
         <Button variant="outline" asChild>
           <a href="#/print">Print proposal</a>

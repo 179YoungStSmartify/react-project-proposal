@@ -1,6 +1,6 @@
 # 179 Young Street — Smart Home Proposal
 
-Client-facing React proposal site for 179 Young Street, prepared by Sam Lee and Angus Wong. The source proposal date is 25 September 2026; it is proposal-preparation metadata, not a build timestamp. Pricing and scope remain indicative and subject to the written confirmation described on the site.
+Client-facing React proposal site for 179 Young Street, prepared by Sam Lee and Angus Wong. The source proposal date is 05 October 2026; it is proposal-preparation metadata, not a build timestamp. Pricing and scope remain indicative and subject to the written confirmation described on the site.
 
 This repository is public and the Pages workflow deploys the Vite-built client site. Do not place passwords, access tokens, internal notes, vault contents, personal client records, or non-public project documents here. GitHub Pages is public hosting, not authenticated/private hosting; assume every deployed asset and page is readable by anyone. The site includes a bundled interactive home model, so review its content before publication.
 

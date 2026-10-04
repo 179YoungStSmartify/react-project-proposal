@@ -34,7 +34,7 @@ export function PrintableProposalPage() {
           </p>
           <div className="print-meta">
             <span>Prepared by Sam Lee &amp; Angus Wong</span>
-            <span>Proposal date: 25 September 2026</span>
+            <span>Proposal date: 05 October 2026</span>
           </div>
         </header>
 
