@@ -221,7 +221,9 @@ export function ProposalPage() {
           Prepared by Sam Lee &amp; Angus Wong · Proposal date: 25 September
           2026.
         </p>
-        <Button onClick={() => window.print()}>Print proposal</Button>
+        <Button variant="outline" asChild>
+          <a href="#/print">Print proposal</a>
+        </Button>
       </footer>
       <Button
         className={`back-top ${showTop ? "visible" : ""}`}

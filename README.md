@@ -63,7 +63,7 @@ npm run test:e2e
 npm run test:e2e:report
 ```
 
-The runner builds and starts its own production preview under the real repository subpath. Tests run in Chromium at desktop and mobile widths with both normal and reduced motion; mobile is emulation, not a real handset. Tests assert actual section position (not just URL changes), repeated anchor clicks, cross-page links, deep-link reloads, history, back-to-top, skip-link focus, mobile focus trapping, gallery removal, brightness keys, responsive overflow and screen/print pricing. Each test uses a fresh browser context and fails on browser console or uncaught errors. No fixed sleeps or automatic retries hide failures.
+The runner builds and starts its own production preview under the real repository subpath. Tests run in Chromium at desktop and mobile widths with both normal and reduced motion; mobile is emulation, not a real handset. Tests assert actual section position (not just URL changes), repeated anchor clicks, cross-page links, deep-link reloads, history, back-to-top, skip-link focus, mobile focus trapping, gallery removal, brightness keys, responsive overflow and the generated print-only proposal route (including prices, scope, and omission of interactive page content). Each test uses a fresh browser context and fails on browser console or uncaught errors. No fixed sleeps or automatic retries hide failures.
 
 - Interactive runner: `npm run test:e2e:ui`
 - A focused regression: `npm run test:e2e -- --grep "deep links"`
@@ -80,6 +80,6 @@ npx playwright install chromium
 QA_URL=http://127.0.0.1:4174/react-project-proposal/ node tests/browser-smoke.mjs
 ```
 
-Set `QA_OUTPUT` to a local evidence directory if desired. The test checks desktop/mobile layouts, wall-plate gallery removal, service-scope copy, keyboard controls, routing, viewer rendering/controls/GLB export, teardown and print. QA output is ignored by Git and not deployed.
+Set `QA_OUTPUT` to a local evidence directory if desired. The test checks desktop/mobile layouts, wall-plate gallery removal, proposal and network-page structure, per-tier external design links, keyboard controls, routing, viewer rendering/controls/GLB export, teardown and generated print output. QA output is ignored by Git and not deployed.
 
 Live site: https://179youngstsmartify.github.io/react-project-proposal/

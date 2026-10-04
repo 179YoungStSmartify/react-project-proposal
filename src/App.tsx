@@ -4,11 +4,12 @@ import { Button } from "./components/ui/button";
 import { ProposalPage } from "./pages/ProposalPage";
 import { ViewerPage } from "./pages/ViewerPage";
 import { NetworkPage } from "./pages/NetworkPage";
+import { PrintableProposalPage } from "./pages/PrintableProposalPage";
 import { useRoute } from "./lib/routing";
 export default function App() {
   const { path, section, hash, navigationId } = useRoute();
   useEffect(() => {
-    document.title = `${path === "/viewer" ? "3D Home Viewer" : path === "/network" ? "Network Design" : path === "/" ? "Smart Home Proposal" : "Page not found"} | 179 Young Street`;
+    document.title = `${path === "/viewer" ? "3D Home Viewer" : path === "/network" ? "Network Design" : path === "/print" ? "Printable Proposal" : path === "/" ? "Smart Home Proposal" : "Page not found"} | 179 Young Street`;
     let cancelled = false;
     let frame: number | undefined;
     const scroll = () => {
@@ -28,8 +29,14 @@ export default function App() {
       if (frame !== undefined) cancelAnimationFrame(frame);
     };
   }, [path, section, hash, navigationId]);
+  if (path === "/print") return <PrintableProposalPage />;
+
   return (
-    <>
+    <div className="site-app">
+      <div className="print-shortcut-warning">
+        To print the proposal, use “Print proposal” in the site navigation to
+        open the print-ready version.
+      </div>
       <a
         className="skip-link"
         href="#main-content"
@@ -58,6 +65,6 @@ export default function App() {
           </Button>
         </main>
       )}
-    </>
+    </div>
   );
 }

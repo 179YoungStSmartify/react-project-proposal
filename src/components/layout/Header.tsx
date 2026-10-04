@@ -34,9 +34,11 @@ export function Header({ path }: { path: string }) {
             {label}
           </a>
         ))}
-        <Button variant="outline" onClick={() => window.print()}>
-          <Printer aria-hidden="true" />
-          Print proposal
+        <Button variant="outline" asChild>
+          <a href="#/print">
+            <Printer aria-hidden="true" />
+            Print proposal
+          </a>
         </Button>
       </nav>
       <Sheet open={open} onOpenChange={setOpen}>
@@ -68,15 +70,14 @@ export function Header({ path }: { path: string }) {
                 {label}
               </a>
             ))}
-            <Button
-              variant="outline"
-              onClick={() => {
-                setOpen(false);
-                window.print();
-              }}
-            >
-              <Printer aria-hidden="true" />
-              Print proposal
+            <Button variant="outline" asChild>
+              <a
+                href="#/print"
+                onClick={() => setOpen(false)}
+              >
+                <Printer aria-hidden="true" />
+                Print proposal
+              </a>
             </Button>
           </nav>
         </SheetContent>

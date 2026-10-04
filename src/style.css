@@ -1070,3 +1070,396 @@ footer button {
     row-gap: 0;
   }
 }
+
+.print-shortcut-warning {
+  display: none;
+}
+
+.print-page {
+  min-height: 100vh;
+  padding: 24px;
+  color: var(--ink);
+  background: #eeece6;
+}
+
+.print-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  max-width: 1120px;
+  margin: 0 auto 20px;
+  padding: 16px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.print-actions p {
+  max-width: 660px;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.print-action-buttons {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 10px;
+}
+
+.print-action-buttons .button.outline {
+  color: var(--ink);
+}
+
+.print-document {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 44px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+  box-shadow: 0 14px 42px #27201618;
+}
+
+.print-header {
+  margin-bottom: 34px;
+  padding-bottom: 22px;
+  border-bottom: 2px solid var(--gold);
+  break-inside: avoid;
+}
+
+.print-address,
+.print-subtitle {
+  margin: 0 0 8px;
+  color: var(--text-muted);
+}
+
+.print-header h1 {
+  margin: 6px 0;
+  font-size: 38px;
+}
+
+.print-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 26px;
+  margin-top: 18px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.print-page .print-section {
+  margin: 0 0 34px;
+}
+
+.print-page .section-heading {
+  max-width: none;
+  margin-bottom: 16px;
+}
+
+.print-page .section-heading h2 {
+  margin-bottom: 8px;
+  font-size: 25px;
+}
+
+.print-page .section-heading > p {
+  max-width: none;
+  margin: 6px 0;
+}
+
+.print-pricing-note {
+  font-weight: 650;
+}
+
+.print-page .print-section .cards {
+  gap: 12px;
+  align-items: stretch;
+}
+
+.print-page .metal {
+  height: 42px;
+}
+
+.print-page .tier-content {
+  padding: 14px;
+}
+
+.print-page .tier h3 {
+  font-size: 22px;
+}
+
+.print-page .tier-content > p,
+.print-page .tier-content dd,
+.print-page .tier-content dt {
+  font-size: 11px;
+}
+
+.print-page .tier-content > p {
+  min-height: 0;
+  margin: 4px 0;
+}
+
+.print-page .tier dl div {
+  gap: 6px;
+  padding: 3px 0;
+  font-size: 9px;
+  line-height: 1.15;
+}
+
+.print-page .network-design-link {
+  margin: 0 0 6px;
+  font-size: 9px;
+}
+
+.print-page .small-note {
+  margin: 5px 0;
+  font-size: 9px;
+}
+
+.print-page .price {
+  margin-top: 8px;
+  padding-top: 8px;
+}
+
+.print-page .price strong {
+  font-size: 18px;
+}
+
+.print-page .tier-content dd {
+  line-height: 1.3;
+}
+
+.print-page .tier.featured {
+  box-shadow: none;
+}
+
+.print-page .print-comparison-section > .section {
+  margin-bottom: 0;
+}
+
+.print-page .print-network-section,
+.print-page .print-comparison-section {
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+}
+
+.print-foundation-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 28px;
+  margin: 0;
+  padding-left: 20px;
+}
+
+.print-foundation-list li,
+.print-steps li {
+  color: var(--text-muted);
+}
+
+.print-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin: 0;
+  padding-left: 22px;
+}
+
+.print-steps li {
+  padding-left: 4px;
+}
+
+.print-steps strong,
+.print-steps span {
+  display: block;
+}
+
+.print-steps strong {
+  margin-bottom: 5px;
+  color: var(--ink);
+}
+
+.print-footer {
+  margin-top: 30px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.print-footer p {
+  margin: 5px 0;
+}
+
+@media (max-width: 760px) {
+  .print-page {
+    padding: 12px;
+  }
+
+  .print-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .print-action-buttons {
+    flex-wrap: wrap;
+  }
+
+  .print-document {
+    padding: 22px;
+  }
+
+  .print-page .print-section .cards,
+  .print-foundation-list,
+  .print-steps {
+    grid-template-columns: 1fr;
+  }
+}
+
+@page {
+  size: A4 landscape;
+  margin: 12mm;
+}
+
+@media print {
+  html,
+  body,
+  #root {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+    color: #171612 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .site-app > :not(.print-shortcut-warning) {
+    display: none !important;
+  }
+
+  .site-app .print-shortcut-warning {
+    display: block !important;
+    padding: 28px;
+    text-align: center;
+    font: 14pt/1.5 sans-serif;
+  }
+
+  .print-page {
+    min-height: 0;
+    padding: 0 !important;
+    background: #fff !important;
+  }
+
+  .print-actions {
+    display: none !important;
+  }
+
+  .print-document {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 9pt;
+  }
+
+  .print-header {
+    margin-bottom: 20px;
+    break-after: avoid;
+  }
+
+  .print-header h1 {
+    font-size: 28pt;
+  }
+
+  .print-page .section-heading h2 {
+    font-size: 17pt;
+  }
+
+  .print-page .section-heading p,
+  .print-page .tier-content > p,
+  .print-page .tier-content dd,
+  .print-page .tier-content dt {
+    font-size: 8pt;
+  }
+
+  .print-page .print-section {
+    margin-bottom: 20px;
+    break-inside: avoid;
+  }
+
+  .print-page .print-service-section,
+  .print-page .print-network-section,
+  .print-page .print-comparison-section,
+  .print-page .print-next-steps-section {
+    break-before: page;
+  }
+
+  .print-page .print-section .cards {
+    gap: 8px;
+  }
+
+  .print-page .metal {
+    height: 28px;
+  }
+
+  .print-page .tier-content {
+    padding: 9px;
+  }
+
+  .print-page .tier h3 {
+    font-size: 15pt;
+  }
+
+  .print-page .tier-content > p,
+  .print-page .tier-content dd,
+  .print-page .tier-content dt {
+    line-height: 1.18;
+  }
+
+  .print-page .table-wrap,
+  .print-page .table-wrap [data-slot="table-container"] {
+    overflow: visible !important;
+  }
+
+  .print-page table {
+    width: 100%;
+    min-width: 0;
+    table-layout: fixed;
+    font-size: 7pt;
+  }
+
+  .print-page table caption {
+    caption-side: top;
+    padding: 4px 0 7px;
+    text-align: left;
+    font-size: 7pt;
+    line-height: 1.2;
+  }
+
+  .print-page th,
+  .print-page td {
+    padding: 3px 4px;
+    font-size: 7pt;
+    line-height: 1.15;
+    vertical-align: top;
+  }
+
+  .print-page th:first-child,
+  .print-page td:first-child {
+    width: 18%;
+  }
+
+  .print-page tr,
+  .print-foundation-list li,
+  .print-steps li {
+    break-inside: avoid;
+  }
+
+  .print-footer {
+    break-inside: avoid;
+  }
+}

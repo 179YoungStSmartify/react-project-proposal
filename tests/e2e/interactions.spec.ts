@@ -1,61 +1,43 @@
 import { test, expect, openProposal, navigate } from "./fixtures";
+import { comparisonRows, lightingTiers, networkTiers } from "../../src/data";
 
-test("screen and print preserve prices with neutral pricing wording", async ({
+test("proposal screen renders current package prices and network data", async ({
   page,
 }) => {
   await openProposal(page);
-  const check = async () => {
-    await expect(page.locator("body")).not.toContainText(
-      /\bGST\b|goods and services tax/i,
-    );
-    for (const price of [
-      "$8,500",
-      "$12,000",
-      "$18,000",
-      "$1,825",
-      "$2,630",
-      "$4,805",
-    ])
-      await expect(page.getByText(price, { exact: true })).toBeVisible();
-    const network = [
-      [
-        "silver",
-        "Dream Router (UDR) · 2× U7 Pro APs · Ultra 60W (USW-Ultra-60W) switch",
-        "$1,825",
-      ],
-      [
-        "gold",
-        "Cloud Gateway Ultra (UCG-Ultra) · 4× U7 Pro APs · Flex 2.5G PoE (USW-Flex-2.5G-8-PoE) switch",
-        "$2,630",
-      ],
-      [
-        "platinum",
-        "Cloud Gateway Max 2TB (UCG-Max-2TB) · 4× U7 Pro APs · 1× Ultra (USW-Ultra) + 1× Flex 2.5G PoE (USW-Flex-2.5G-8-PoE) · 3× G6 cameras",
-        "$4,805",
-      ],
-    ];
-    for (const [tier, kit, price] of network) {
-      await expect(page.locator(`#network-${tier}`)).toContainText(kit);
-      await expect(
-        page.locator(`a[href="#/?section=network-${tier}"]`),
-      ).toContainText(`${price} indicative hardware`);
+  await expect(page.locator("body")).not.toContainText(
+    /\bGST\b|goods and services tax/i,
+  );
+  await expect(page.locator("#packages .tier .price strong")).toHaveText(
+    lightingTiers.map((tier) => tier.price),
+  );
+  await expect(page.locator("#network-options .tier .price strong")).toHaveText(
+    networkTiers.map((tier) => tier.price),
+  );
+
+  for (const tierData of networkTiers) {
+    const card = page.locator(`#network-${tierData.key}`);
+    await expect(card.locator("h3")).toHaveText(tierData.name);
+    await expect(card.locator("dl > div")).toHaveCount(tierData.specs.length);
+    for (const [index, [label, value]] of tierData.specs.entries()) {
+      const row = card.locator("dl > div").nth(index);
+      await expect(row.locator("dt")).toHaveText(label);
+      await expect(row.locator("dd")).toHaveText(value);
     }
-    await expect(page.locator("#network-platinum")).toContainText(
-      "1× G6 Pro Dome, 1× G6 180 and 1× G6 Mini Dome; 2 TB model",
+    if (!tierData.designUrl) throw new Error(`${tierData.key} design URL missing`);
+    await expect(card.locator("a.network-design-link")).toHaveAttribute(
+      "href",
+      tierData.designUrl,
     );
-    await expect(
-      page.getByText(
-        "Network pricing is hardware only, quoted separately from lighting.",
-        { exact: false },
-      ),
-    ).toContainText("Cabling and installation are quoted at the home visit.");
-    await expect(page.locator("footer")).toContainText(
-      "Prices are confirmed in writing after the home visit",
-    );
-  };
-  await check();
-  await page.emulateMedia({ media: "print" });
-  await check();
+  }
+
+  const homeNetwork = comparisonRows.find((row) => row[0] === "Home network");
+  const comparisonRow = page.getByRole("row").filter({
+    has: page.getByRole("rowheader", { name: "Home network", exact: true }),
+  });
+  await expect(comparisonRow.getByRole("cell")).toHaveText(
+    homeNetwork!.slice(1),
+  );
 });
 test("brightness keyboard controls do not change either light toggle", async ({
   page,

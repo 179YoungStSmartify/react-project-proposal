@@ -37,7 +37,7 @@ Keep package quantities/prices in `src/data.ts`. Preserve the source comparison'
 
 Centered maximum 1240px composition; narrow layouts collapse grids and replace desktop navigation with Sheet. Usable at 320px without document overflow. Decorative hero art is contained locally, not by clipping the document.
 
-Use visible focus rings, semantic landmarks, a functional focus-moving skip link, labelled controls, meaningful image alternatives and live state outputs. Respect reduced-motion preferences. Print hides navigation/interaction chrome and retains proposal details. Embedded 3D viewer mounts only on its own route and is not printed.
+Use visible focus rings, semantic landmarks, a functional focus-moving skip link, labelled controls, meaningful image alternatives and live state outputs. Respect reduced-motion preferences. The `#/print` route generates a dedicated A4 landscape proposal document, leaving out navigation, the interactive lighting demo and the 3D viewer. A separate print stylesheet formats the document and hides the print controls; native printing from other routes shows guidance instead of printing the website.
 
 ## Verification
 

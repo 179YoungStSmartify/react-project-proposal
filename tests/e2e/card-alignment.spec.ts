@@ -7,8 +7,9 @@ async function expectAlignedGroups(
     { specCount: 12, scopeNoteCount: 0 },
     { specCount: 9, scopeNoteCount: 1 },
   ],
+  selector = ".cards",
 ) {
-  const cardGroups = page.locator(".cards");
+  const cardGroups = page.locator(selector);
   await expect(cardGroups).toHaveCount(expectedGroups.length);
   for (const [groupIndex, group] of (await cardGroups.all()).entries()) {
     await expect
@@ -87,13 +88,18 @@ test("side-by-side service and network cards share every row height on screen an
   expect(
     await priceRow.evaluate((row) => row.getBoundingClientRect().height),
   ).toBeGreaterThan(originalPriceHeight);
+  await page.goto("./#/print");
   await page.emulateMedia({ media: "print" });
   await expectAlignedGroups(page);
   await page.emulateMedia({ media: "screen" });
-  await navigate(page, "Network design");
+  await page.goto("./#/network");
   await expectAlignedGroups(page, [{ specCount: 9, scopeNoteCount: 1 }]);
-  await page.emulateMedia({ media: "print" });
-  await expectAlignedGroups(page, [{ specCount: 9, scopeNoteCount: 1 }]);
+  await page.goto("./#/print");
+  await expectAlignedGroups(
+    page,
+    [{ specCount: 9, scopeNoteCount: 1 }],
+    ".print-network-section .cards",
+  );
 });
 
 test("card row alignment adapts to wrapping and returns to compact stacked mobile rows", async ({
@@ -157,6 +163,10 @@ test("card row alignment adapts to wrapping and returns to compact stacked mobil
       dd.style.fontSize = "20px";
     });
   await expectAlignedGroups(page, [{ specCount: 9, scopeNoteCount: 1 }]);
-  await page.emulateMedia({ media: "print" });
-  await expectAlignedGroups(page, [{ specCount: 9, scopeNoteCount: 1 }]);
+  await page.goto("./#/print");
+  await expectAlignedGroups(
+    page,
+    [{ specCount: 9, scopeNoteCount: 1 }],
+    ".print-network-section .cards",
+  );
 });

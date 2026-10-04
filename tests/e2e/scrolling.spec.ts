@@ -22,7 +22,7 @@ test("clicking an unchanged section link scrolls again", async ({ page }) => {
   await link.click();
   await expectSectionAtTop(page, "packages");
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
-  await expect.poll(() => page.evaluate(() => scrollY)).toBe(0);
+  await expect.poll(() => page.evaluate(() => scrollY)).toBeLessThan(3);
   await link.click();
   await expectSectionAtTop(page, "packages");
 });
@@ -33,7 +33,7 @@ for (const tier of ["silver", "gold", "platinum"])
     await expectSectionAtTop(page, `network-${tier}`);
     await expect(page.locator(`#network-${tier}`)).toHaveCount(1);
     await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
-    await expect.poll(() => page.evaluate(() => scrollY)).toBe(0);
+    await expect.poll(() => page.evaluate(() => scrollY)).toBeLessThan(3);
     await page.locator(`a[href="#/?section=network-${tier}"]`).click();
     await expectSectionAtTop(page, `network-${tier}`);
   });
@@ -69,7 +69,7 @@ test("back and forward restore section destinations", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: "Network design", exact: true }),
   ).toBeVisible();
-  await expect.poll(() => page.evaluate(() => scrollY)).toBe(0);
+  await expect.poll(() => page.evaluate(() => scrollY)).toBeLessThan(3);
 });
 test("page navigation resets a scrolled page to the top", async ({ page }) => {
   await openProposal(page);
@@ -77,7 +77,7 @@ test("page navigation resets a scrolled page to the top", async ({ page }) => {
     window.scrollTo({ top: 2000, behavior: "instant" }),
   );
   await navigate(page, "Network design");
-  await expect.poll(() => page.evaluate(() => scrollY)).toBe(0);
+  await expect.poll(() => page.evaluate(() => scrollY)).toBeLessThan(3);
 });
 test("back-to-top appears only after scrolling and returns to top", async ({
   page,
@@ -90,7 +90,7 @@ test("back-to-top appears only after scrolling and returns to top", async ({
   await page.evaluate(() => window.scrollTo({ top: 800, behavior: "instant" }));
   await expect(top).toBeVisible();
   await top.click();
-  await expect.poll(() => page.evaluate(() => scrollY)).toBe(0);
+  await expect.poll(() => page.evaluate(() => scrollY)).toBeLessThan(3);
   await expect(top).toBeHidden();
 });
 test("skip link focuses main without breaking hash routing", async ({

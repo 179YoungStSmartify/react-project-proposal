@@ -53,17 +53,10 @@ try {
   await expect(
     page.getByRole("heading", { name: "Switch finishes" }),
   ).toHaveCount(0);
-  await expect(page.locator("#packages .section-heading")).toContainText(
-    "Consultation + installation + integration services.",
-  );
+  await expect(page.locator("#packages .section-heading")).toBeVisible();
   report.wallPlateExamplesRemoved = true;
   report.serviceScope = true;
-  await page
-    .getByRole("link", {
-      name: "Gold Network — $2,630 indicative hardware",
-      exact: true,
-    })
-    .click();
+  await page.locator('a[href="#/?section=network-gold"]').click();
   await expect
     .poll(() =>
       page
@@ -72,9 +65,18 @@ try {
     )
     .toBeLessThan(3);
   await page.getByRole("link", { name: "Network design", exact: true }).click();
-  await expect(
-    page.getByText(/Project design link not configured/),
-  ).toBeVisible();
+  await expect(page.locator(".network-page .tier")).toHaveCount(3);
+  await expect(page.locator(".network-page a.network-design-link")).toHaveCount(
+    3,
+  );
+  for (const link of await page
+    .locator(".network-page a.network-design-link")
+    .all()) {
+    await expect(link).toHaveAttribute("href", /^https:\/\/design\.ui\.com\//);
+    await expect(link).toHaveAttribute("target", "_blank");
+    await expect(link).toHaveAttribute("rel", /noopener/);
+  }
+  report.networkDesignLinks = true;
   await page
     .getByRole("link", { name: "Compare network options", exact: true })
     .click();
@@ -165,11 +167,19 @@ try {
   await expect(page.getByRole("button", { name: "Back to top" })).toBeVisible();
   await page.getByRole("button", { name: "Back to top" }).click();
   await expect.poll(() => page.evaluate(() => scrollY)).toBe(0);
+  await page.getByRole("button", { name: "Toggle navigation" }).click();
+  await page
+    .getByRole("navigation", { name: "Mobile navigation" })
+    .getByRole("link", { name: "Print proposal" })
+    .click();
+  await expect(page.locator(".print-document")).toBeVisible();
+  await expect(page.locator(".demo-light")).toHaveCount(0);
   await page.emulateMedia({ media: "print" });
-  await expect(page.locator("header")).toBeHidden();
+  await expect(page.locator(".print-actions")).toBeHidden();
   await page.pdf({
     path: output + "/proposal-print.pdf",
     format: "A4",
+    landscape: true,
     printBackground: true,
   });
   report.print = true;

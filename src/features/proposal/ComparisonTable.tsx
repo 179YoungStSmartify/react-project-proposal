@@ -8,7 +8,13 @@ import {
   TableCell,
   TableCaption,
 } from "../../components/ui/table";
-export function ComparisonTable() {
+export function ComparisonTable({
+  linkNetworkCards = true,
+  showCaption = true,
+}: {
+  linkNetworkCards?: boolean;
+  showCaption?: boolean;
+} = {}) {
   return (
     <section className="section">
       <div className="section-heading">
@@ -21,14 +27,16 @@ export function ComparisonTable() {
         aria-label="Scrollable package comparison"
       >
         <Table>
-          <TableCaption>
-            Consultation, installation and integration services. Listed
-            wall-screen hardware and one smart-home hub are included: HA Green
-            for Silver and Gold; mini PC for Platinum. Switches, relays and wall
-            plates are excluded and client supplied. Network packages include
-            their listed hardware and are priced separately; cabling and
-            installation are excluded. All prices are indicative.
-          </TableCaption>
+          {showCaption && (
+            <TableCaption>
+              Consultation, installation and integration services. Listed
+              wall-screen hardware and one smart-home hub are included: HA Green
+              for Silver and Gold; mini PC for Platinum. Switches, relays and wall
+              plates are excluded and client supplied. Network packages include
+              their listed hardware and are priced separately; cabling and
+              installation are excluded. All prices are indicative.
+            </TableCaption>
+          )}
           <TableHeader>
             <TableRow>
               <TableHead>Capability</TableHead>
@@ -43,7 +51,7 @@ export function ComparisonTable() {
                 <TableHead scope="row">{label}</TableHead>
                 {values.map((value, index) => (
                   <TableCell key={index}>
-                    {label === "Home network" ? (
+                    {label === "Home network" && linkNetworkCards ? (
                       <a href={`#/?section=network-${networkTiers[index].key}`}>
                         {value}
                       </a>
